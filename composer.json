@@ -1,0 +1,24 @@
+{
+    "name": "maestro-module/users",
+    "type": "maestro-module",
+    "description": "",
+    "authors": [
+        {
+            "name": "Giuliano Sampaio",
+            "email": "giuguitar@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Maestro\\Users\\": ""
+        }
+    }
+}
