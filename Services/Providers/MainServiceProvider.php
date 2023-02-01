@@ -8,11 +8,8 @@ use Illuminate\Support\Facades\Config;
 use Livewire\Livewire;
 use Maestro\Users\Http\Middleware\AuthenticatesUsers;
 use Maestriam\Maestro\Foundation\Registers\FileRegister;
-use Maestro\Users\Views\Components\UserModal;
-use Maestro\Users\Views\Components\UserForm;
-use Maestro\Users\Views\Components\UserTable;
-use Maestro\Users\Views\Components\UserView;
-use Maestro\Users\Views\Pages\UserEdition;
+use Maestro\Users\Views\Pages\UserForm;
+use Maestro\Users\Views\Pages\UserView;
 use Maestro\Users\Views\Pages\UserIndex;
 
 class MainServiceProvider extends ServiceProvider
@@ -164,10 +161,7 @@ class MainServiceProvider extends ServiceProvider
     private function registerViewComponents()
     {
         Livewire::component('users.pages.index', UserIndex::class);
-        Livewire::component('users.pages.edition', UserEdition::class);
         Livewire::component('users.components.form', UserForm::class);
-        Livewire::component('users.components.table', UserTable::class);
-        Livewire::component('users.components.modal', UserModal::class);
         Livewire::component('users.components.view', UserView::class);
     }
 }

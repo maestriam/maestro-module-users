@@ -1,19 +1,19 @@
 <?php
 
-namespace Maestro\Users\Views\Components;
+namespace Maestro\Users\Views\Pages;
 
-use Livewire\Component;
+use Maestro\Admin\Views\MaestroView;
 use Maestro\Users\Database\Models\User;
 use Maestro\Users\Support\Facade\Users;
 
-class UserForm extends Component
+class UserForm extends MaestroView
 {
     /**
      * Arquivo de view do componente
      *
      * @var string
      */
-    protected string $view = 'users::components.user-form';
+    protected string $view = 'users::pages.user-form';
 
     /**
      * Nome do usuário
@@ -61,14 +61,14 @@ class UserForm extends Component
     public string $passwordConfirm = '';
 
     /**
-     * Undocumented variable
+     * Dados do usuário
      *
      * @var User|null
      */
     public ?User $user = null;
 
     /**
-     * Undocumented variable
+     * Id do usuário utilizado no modo edição. 
      *
      * @var integer|null
      */
@@ -79,8 +79,10 @@ class UserForm extends Component
      *
      * @return void
      */
-    public function mount() 
+    public function mount(int $id = null) 
     {
+        $this->setUser($id);
+
         if (! $this->isEdition()) {
             return;
         }
@@ -225,12 +227,27 @@ class UserForm extends Component
     }
 
     /**
+     * Undocumented function
+     *
+     * @param integer $id
+     * @return self
+     */
+    private function setUser(int $id = null) : self
+    {
+        if ($id == null) return $this;    
+
+        $this->userId = $id;
+        
+        return $this;
+    }
+
+    /**
      * Renderiza o arquivo 
      *
      * @return void
      */
     public function render()
     {
-        return view($this->view);
+        return $this->renderView();
     }
 }

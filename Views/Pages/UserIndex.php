@@ -2,42 +2,102 @@
 
 namespace Maestro\Users\Views\Pages;
 
-use Livewire\Component;
+use Livewire\WithPagination;
+use Illuminate\Contracts\View\View;
+use Maestro\Admin\Views\MaestroView;
+use Maestro\Users\Support\Concerns\FiresUserDeleteModal;
+use Maestro\Users\Support\Facade\Users;
 
-class UserIndex extends Component
+class UserIndex extends MaestroView
 {
-    /**
-     * Undocumented variable
-     *
-     * @var string
-     */
-    private string $view;
+    use WithPagination, 
+        FiresUserDeleteModal;
 
     /**
      * Undocumented variable
      *
      * @var string
      */
-    private string $base;
+    public string $search = '';
+
+    /**
+     * {@inheritDoc}
+     */
+    protected string $view = 'users::pages.user-index';
+
+    public $listeners = ['removeUser'];
+
+    /**
+     * Redireciona para a pagina de lista de usuários
+     *
+     * @return void
+     */
+    public function goToCreate()
+    {        
+        return redirect()->route('maestro.users.create');
+    }
+
+    /**
+     * Renderiza a view do componente
+     * 
+     * @return View
+     */
+    public function render() : View
+    {
+        $users = $this->getUsers();
+
+        $collection = ['users' => $users];
+
+        return $this->renderView($collection);
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $id
+     * @return void
+     */
+    public function remove(string $id)
+    {
+        $params = ['userId' => $id];
+
+        $this->fireDeleteModal($params, 'removeUser');
+    }
 
     /**
      * Undocumented function
      *
      * @return void
      */
-    public function mount()
+    private function getUsers()
+    {   
+        return Users::user()->search($this->search)->paginate(10);
+    }
+    
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function updatingSearch()
     {
-        $this->view = 'users::pages.user-index';
-        $this->base = 'admin::components.base-view';
+        $this->resetPage();
     }
 
     /**
-     * Renderiza a view do menu lateral
-     * 
-     * @return \Illuminate\Contracts\View\View
+     * Undocumented function
+     *
+     * @return void
      */
-    public function render()
+    public function paginationView()
     {
-        return view($this->view)->layout($this->base);
+        return 'users::partials.pagination';
+    }
+
+    public function removeUser($params)
+    {
+        $values = (object) $params;
+
+        Users::user()->delete($values->userId);
     }
 }

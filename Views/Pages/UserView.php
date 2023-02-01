@@ -1,6 +1,6 @@
 <?php
 
-namespace Maestro\Users\Views\Components;
+namespace Maestro\Users\Views\Pages;
 
 use Maestro\Admin\Views\MaestroView;
 use Maestro\Users\Database\Models\User;
@@ -20,7 +20,7 @@ class UserView extends MaestroView
      *
      * @var string
      */
-    protected string $view = 'users::components.user-view';
+    protected string $view = 'users::pages.user-view';
 
     /**
      * Inicializa os atributos ao iniciar o componente. 
