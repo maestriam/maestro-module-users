@@ -1,5 +1,7 @@
 <?php
 
 return [
-    'error' => 'Ops!'
+    'login' => [
+        'invalid' => 'Login e senha inválidos.'
+    ]
 ];

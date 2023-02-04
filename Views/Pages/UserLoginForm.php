@@ -5,6 +5,7 @@ namespace Maestro\Users\Views\Pages;
 use Maestro\Admin\Views\MaestroView;
 use Illuminate\Support\Facades\Validator;
 use Maestro\Users\Http\Requests\LoginRequest;
+use Maestro\Users\Support\Facade\Users;
 
 class UserLoginForm extends MaestroView
 {
@@ -23,25 +24,25 @@ class UserLoginForm extends MaestroView
     public ?string $password = null;
 
     /**
-     * Rota que será redirecionado depois do login
-     * 
-     * @var string
-     */
-    private string $route = 'maestro.admin.home';
-
-    /**
-     * Caminho base
+     * Caminho de tela base de login.
      *
      * @var string
      */
     protected string $base = 'admin::pages.login';
 
     /**
-     * Caminho do arquivo
+     * Caminho do arquivo de formulário de login
      *
      * @var string
      */
     protected string $view = 'users::pages.user-login';
+
+    /**
+     * Rota que será redirecionado depois do login
+     * 
+     * @var string
+     */
+    private string $route = 'maestro.admin.home';
 
     /**
      * Regras de validação do formulário. 
@@ -63,15 +64,17 @@ class UserLoginForm extends MaestroView
      * @var \Maestro\Admin\Http\Requests\LoginRequest
      */
     private LoginRequest $validation;
-   
-    
-    protected function startValidation()
+
+    # {-- Public Functions --}
+
+    /**
+     * Exibe a view do componente
+     * 
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function render()
     {
-        $this->validation = new LoginRequest();
-
-        $this->rules = $this->validation->rules();
-
-        $this->messages = $this->validation->messages();
+        return $this->renderView();
     }
 
     /**
@@ -83,9 +86,13 @@ class UserLoginForm extends MaestroView
     {
         $this->guard();
 
-        return redirect()->route($this->route);
-    }
+        if ($this->login()) {
+            return $this->success();
+        }
 
+        return $this->failed();
+    }
+    
     /**
      * Verifica se o formulário de login foi preenchido corretamente.
      * Se sim, deve retornar true.
@@ -105,6 +112,59 @@ class UserLoginForm extends MaestroView
         return $validator->validate();
     }
 
+    # {-- Protected Functions --}
+
+    /**
+     * Inicializa as regras para validação de formulário de login. 
+     *
+     * @return void
+     */
+    protected function startValidation()
+    {
+        $this->validation = new LoginRequest();
+
+        $this->rules = $this->validation->rules();
+
+        $this->messages = $this->validation->messages();
+    }    
+
+    # {-- Private Functions --}
+
+    /**
+     * Executa o login com os dados do usuário.
+     * Caso o login e senha seja inválido, deve retornar false. 
+     *
+     * @return boolean
+     */
+    private function login() : bool 
+    {
+        $ret = Users::auth()->login($this->email, $this->password);
+
+        return ($ret == null) ? false : true;
+    }
+
+    /**
+     * Executa as regra de negócio em caso de sucesso no login.
+     *
+     * @return \Illuminate\Http\RedirectResponse|mixed
+     */
+    private function success()
+    {
+        return redirect()->route($this->route);
+    }
+
+    /**
+     * Executa as regra de negócio em caso de erro no login.
+     *
+     * @return void
+     */
+    private function failed() : void
+    {
+        $message = __('users::alerts.login.invalid');
+        
+        session()->flash('message', $message);
+    }
+
     /**
      * Retorna os dados preenchidos pelo usuário no formulário. 
      *
@@ -116,15 +176,5 @@ class UserLoginForm extends MaestroView
             'email' => $this->email,
             'password' => $this->password
         ];
-    }
-
-    /**
-     * Exibe a view do componente
-     * 
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function render()
-    {
-        return $this->renderView();
     }
 }
