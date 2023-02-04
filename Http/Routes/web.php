@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Maestro\Users\Views\Pages\UserView;
 use Maestro\Users\Views\Pages\UserIndex;
 use Maestro\Users\Views\Pages\UserForm;
+use Maestro\Users\Views\Pages\UserHome;
+use Maestro\Users\Views\Pages\UserLoginForm;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,11 +18,9 @@ use Maestro\Users\Views\Pages\UserForm;
 |
 */
 
-
-Route::get('/home', 'AdminController@home')->name('maestro.admin.home');
-Route::get('/login', 'AdminController@login')->name('maestro.admin.login');
+Route::get('/login', UserLoginForm::class)->name('maestro.user.login');
+Route::get('/home', UserHome::class)->name('maestro.admin.home');
 Route::get('/logout', 'AdminController@logout')->name('maestro.admin.logout');
-
 
 Route::prefix('users')->group(function () {
     Route::get('/', UserIndex::class)->name('maestro.users.index');
@@ -28,4 +28,3 @@ Route::prefix('users')->group(function () {
     Route::get('/{id}/edit', UserForm::class)->name('maestro.users.edit');
     Route::get('/{id}/view', UserView::class)->name('maestro.users.view');
 });
-

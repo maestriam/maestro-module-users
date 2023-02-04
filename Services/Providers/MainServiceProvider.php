@@ -11,6 +11,7 @@ use Maestriam\Maestro\Foundation\Registers\FileRegister;
 use Maestro\Users\Views\Pages\UserForm;
 use Maestro\Users\Views\Pages\UserView;
 use Maestro\Users\Views\Pages\UserIndex;
+use Maestro\Users\Views\Pages\UserLoginForm;
 
 class MainServiceProvider extends ServiceProvider
 {
@@ -160,8 +161,9 @@ class MainServiceProvider extends ServiceProvider
 
     private function registerViewComponents()
     {
+        Livewire::component('users.pages.view', UserView::class);
+        Livewire::component('users.pages.form', UserForm::class);
         Livewire::component('users.pages.index', UserIndex::class);
-        Livewire::component('users.components.form', UserForm::class);
-        Livewire::component('users.components.view', UserView::class);
+        Livewire::component('users.pages.login', UserLoginForm::class);
     }
 }

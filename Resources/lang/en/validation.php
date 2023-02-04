@@ -12,6 +12,7 @@ return [
         'unique'   => 'A conta enviada já está em utilização.',
     ],
     'email' => [
+        'email'    => 'E-mail informado possui um formato inválido',
         'required' => 'O campo "e-mail" é obrigatório.'
     ],
     'password' => [
