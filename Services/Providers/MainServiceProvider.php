@@ -6,6 +6,7 @@ use Maestro\Users\Entities\FacadeEntity;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Config;
 use Livewire\Livewire;
+use Maestriam\FileSystem\Support\FileSystem;
 use Maestro\Users\Http\Middleware\AuthenticatesUsers;
 use Maestriam\Maestro\Foundation\Registers\FileRegister;
 use Maestro\Users\Views\Pages\UserForm;
@@ -39,7 +40,7 @@ class MainServiceProvider extends ServiceProvider
         $this->registerFacade();
         $this->registerMiddlewares();
         $this->registerViewComponents();
-        $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+        $this->registerMigrations();
     }
 
     /**
@@ -152,7 +153,7 @@ class MainServiceProvider extends ServiceProvider
 
     private function registerSeeds() : self
     {
-        $path = module_path($this->moduleName, '/Database/Seeders');
+        $path = module_path($this->moduleName, '/Database/Seeders/');
 
         FileRegister::from($path);
 
@@ -165,5 +166,12 @@ class MainServiceProvider extends ServiceProvider
         Livewire::component('users.pages.form', UserForm::class);
         Livewire::component('users.pages.index', UserIndex::class);
         Livewire::component('users.pages.login', UserLoginForm::class);
+    }
+
+    private function registerMigrations()
+    {
+        $path = module_path($this->moduleName, 'Database/Migrations');
+
+        $this->loadMigrationsFrom($path);
     }
 }

@@ -62,3 +62,7 @@
     
     </x-content>
 </div>
+
+@push('scripts')
+    <script src="{{ asset('maestro/users/js/modal.js') }}"></script>
+@endpush

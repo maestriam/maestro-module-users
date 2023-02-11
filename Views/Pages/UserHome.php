@@ -12,7 +12,9 @@ class UserHome extends MaestroView
     protected string $view = 'users::pages.user-home';
 
     public function render()
-    {
+    {        
+        $this->emitUp('user_login', 'xxxxxxx');
+
         return $this->renderView();
     }
 }

@@ -12,7 +12,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $moduleNamespace = 'Maestro\Users\Views';
+    protected $moduleNamespace = 'Maestro\Users\Http\Controllers';
 
     /**
      * Called before routes are registered.
@@ -35,6 +35,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapWebRoutes();
         $this->mapApiRoutes();
+        $this->mapLiveRoutes();
     }
 
     /**
@@ -57,12 +58,19 @@ class RouteServiceProvider extends ServiceProvider
      * These routes are typically stateless.
      *
      * @return void
-     */
+     */   
     protected function mapApiRoutes()
     {
         Route::prefix('api')
             ->middleware('api')
             ->namespace($this->moduleNamespace)
             ->group(module_path('Users', '/Http/Routes/api.php'));
+    }
+
+    protected function mapLiveRoutes()
+    {
+        Route::middleware('web')
+            ->namespace('Maestro\Users\Views')
+            ->group(module_path('Users', '/Http/Routes/live.php'));
     }
 }

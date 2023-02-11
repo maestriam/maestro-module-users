@@ -3,11 +3,9 @@
 namespace Maestro\Users\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Maestro\Users\Support\Facade\Users;
-use Illuminate\Database\Eloquent\Model;
 use Maestro\Users\Support\Concerns\StoresUsers;
 
-class UserSeeder extends Seeder
+class UsersSeeder extends Seeder
 {
     use StoresUsers;
 

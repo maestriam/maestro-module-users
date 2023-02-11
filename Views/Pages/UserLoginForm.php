@@ -138,9 +138,20 @@ class UserLoginForm extends MaestroView
      */
     private function login() : bool 
     {
-        $ret = Users::auth()->login($this->email, $this->password);
+        $user = Users::auth()->login($this->email, $this->password);
 
-        return ($ret == null) ? false : true;
+        if ($user == null) {
+            return false;
+        }
+
+        $this->setInSession($user);
+
+        return true;
+    }
+
+    private function setInSession($user)
+    {
+        session(['userData' => $user->toArray()]); 
     }
 
     /**

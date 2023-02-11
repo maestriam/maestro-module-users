@@ -17,14 +17,4 @@ use Maestro\Users\Views\Pages\UserLoginForm;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/login', UserLoginForm::class)->name('maestro.user.login');
-Route::get('/home', UserHome::class)->name('maestro.admin.home');
-Route::get('/logout', 'AdminController@logout')->name('maestro.admin.logout');
-
-Route::prefix('users')->group(function () {
-    Route::get('/', UserIndex::class)->name('maestro.users.index');
-    Route::get('/create', UserForm::class)->name('maestro.users.create');
-    Route::get('/{id}/edit', UserForm::class)->name('maestro.users.edit');
-    Route::get('/{id}/view', UserView::class)->name('maestro.users.view');
-});
+Route::get('/logout', 'UserController@logout')->name('maestro.admin.logout');
