@@ -17,4 +17,4 @@ use Maestro\Users\Views\Pages\UserLoginForm;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/logout', 'UserController@logout')->name('maestro.admin.logout');
+Route::get('/logout', 'UserController@logout')->name('maestro.users.logout');
