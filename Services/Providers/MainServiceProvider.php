@@ -2,27 +2,26 @@
 
 namespace Maestro\Users\Services\Providers;
 
-use Maestro\Users\Entities\FacadeEntity;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
-use Maestriam\FileSystem\Support\FileSystem;
-use Maestro\Users\Http\Middleware\AuthenticatesUsers;
 use Maestriam\Maestro\Foundation\Registers\FileRegister;
+use Maestro\Users\Entities\FacadeEntity;
+use Maestro\Users\Http\Middleware\AuthenticatesUsers;
 use Maestro\Users\Views\Pages\UserForm;
-use Maestro\Users\Views\Pages\UserView;
 use Maestro\Users\Views\Pages\UserIndex;
 use Maestro\Users\Views\Pages\UserLoginForm;
+use Maestro\Users\Views\Pages\UserView;
 
 class MainServiceProvider extends ServiceProvider
 {
     /**
-     * @var string $moduleName
+     * @var string
      */
     protected $moduleName = 'Users';
 
     /**
-     * @var string $moduleNameLower
+     * @var string
      */
     protected $moduleNameLower = 'users';
 
@@ -56,26 +55,24 @@ class MainServiceProvider extends ServiceProvider
     public function registerMiddlewares()
     {
         $middlewares = [
-            'users.auth' => AuthenticatesUsers::class
+            'users.auth' => AuthenticatesUsers::class,
         ];
 
         foreach ($middlewares as $key => $class) {
-            $this->app->make('router')->aliasMiddleware($key, $class);            
+            $this->app->make('router')->aliasMiddleware($key, $class);
         }
     }
 
     /**
-     * Registra o facade de suporte, para fornecer 
+     * Registra o facade de suporte, para fornecer
      * funcionalidades para outros módulos.
-     *
-     * @return self
      */
-    protected function registerFacade() : self
+    protected function registerFacade(): self
     {
-        $this->app->bind('users',function() {
+        $this->app->bind('users', function () {
             return new FacadeEntity();
-        });   
-        
+        });
+
         return $this;
     }
 
@@ -89,7 +86,7 @@ class MainServiceProvider extends ServiceProvider
         $file = 'Resources/config/config.php';
 
         $this->publishes([
-            module_path($this->moduleName, $file) => config_path($this->moduleNameLower . '.php'),
+            module_path($this->moduleName, $file) => config_path($this->moduleNameLower.'.php'),
         ], 'config');
         $this->mergeConfigFrom(
             module_path($this->moduleName, $file), $this->moduleNameLower
@@ -103,13 +100,13 @@ class MainServiceProvider extends ServiceProvider
      */
     public function registerViews()
     {
-        $viewPath = resource_path('views/modules/' . $this->moduleNameLower);
+        $viewPath = resource_path('views/modules/'.$this->moduleNameLower);
 
         $sourcePath = module_path($this->moduleName, 'Resources/views');
 
         $this->publishes([
-            $sourcePath => $viewPath
-        ], ['views', $this->moduleNameLower . '-module-views']);
+            $sourcePath => $viewPath,
+        ], ['views', $this->moduleNameLower.'-module-views']);
 
         $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
     }
@@ -121,7 +118,7 @@ class MainServiceProvider extends ServiceProvider
      */
     public function registerTranslations()
     {
-        $langPath = resource_path('lang/modules/' . $this->moduleNameLower);
+        $langPath = resource_path('lang/modules/'.$this->moduleNameLower);
 
         if (is_dir($langPath)) {
             $this->loadTranslationsFrom($langPath, $this->moduleNameLower);
@@ -144,14 +141,15 @@ class MainServiceProvider extends ServiceProvider
     {
         $paths = [];
         foreach (Config::get('view.paths') as $path) {
-            if (is_dir($path . '/modules/' . $this->moduleNameLower)) {
-                $paths[] = $path . '/modules/' . $this->moduleNameLower;
+            if (is_dir($path.'/modules/'.$this->moduleNameLower)) {
+                $paths[] = $path.'/modules/'.$this->moduleNameLower;
             }
         }
+
         return $paths;
     }
 
-    private function registerSeeds() : self
+    private function registerSeeds(): self
     {
         $path = module_path($this->moduleName, '/Database/Seeders/');
 

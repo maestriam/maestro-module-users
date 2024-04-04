@@ -14,9 +14,7 @@ class UserIndex extends MaestroView
         FiresUserDeleteModal;
 
     /**
-     * Undocumented variable
-     *
-     * @var string
+     * {@inheritDoc}
      */
     public string $search = '';
 

@@ -7,7 +7,6 @@ use Maestro\Users\Views\Pages\UserForm;
 use Maestro\Users\Views\Pages\UserHome;
 use Maestro\Users\Views\Pages\UserLoginForm;
 
-
 /*
 |--------------------------------------------------------------------------
 | Live Routes
@@ -17,12 +16,15 @@ use Maestro\Users\Views\Pages\UserLoginForm;
 | routes are loaded by the RouteServiceProvider. 
 | Now create something great!
 */
+Route::get('/home', UserHome::class)
+    ->middleware(['users.auth'])
+    ->name('maestro.admin.home');
 
+Route::get('/login', UserLoginForm::class)
+    ->name('maestro.users.login');
 
-Route::get('/home', UserHome::class)->middleware(['users.auth'])->name('maestro.admin.home');
-Route::get('/login', UserLoginForm::class)->name('maestro.users.login');
+Route::prefix('users')->group(function () {
 
-Route::prefix('users')->group(function () {    
     Route::get('/', UserIndex::class)
         ->middleware(['users.auth'])
         ->name('maestro.users.index');

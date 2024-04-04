@@ -6,8 +6,7 @@
                 :label="'Nome da conta'" 
                 :model="'accountName'" 
                 :name="'accountName'" 
-                :readonly="$this->isEdition()"
-            />
+                :readonly="$this->isEdition()" />
         </x-form-group>                         
         
         @if($this->isEdition() == false)
@@ -16,16 +15,14 @@
                     :label="'Senha'" 
                     :type="'password'" 
                     :model="'password'" 
-                    :name="'password'" 
-                />
+                    :name="'password'" />
             </x-form-group>              
             
             <x-form-group :cols="6">
                 <x-input 
                     :label="'Confirmar senha'" 
                     :type="'password'" 
-                    :model="'passwordConfirm'" 
-                />
+                    :model="'passwordConfirm'" />
             </x-form-group>  
         @endif
 
