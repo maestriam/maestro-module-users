@@ -2,6 +2,7 @@
 
 namespace Maestro\Users\Services\Foundation;
 
+use Maestro\Admin\Support\Concerns\HandlesRequests;
 use Maestro\Users\Database\Models\User;
 use Maestro\Users\Support\Concerns\SearchesUsers;
 use Maestro\Users\Http\Requests\UpdateUserRequest;
@@ -9,7 +10,7 @@ use Maestro\Users\Support\Concerns\StorageFunctions;
 
 class UserUpdater 
 {
-    use SearchesUsers, StorageFunctions;
+    use SearchesUsers, HandlesRequests;
 
     protected UpdateUserRequest $request;
 

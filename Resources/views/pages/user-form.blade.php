@@ -1,11 +1,7 @@
 <div>    
-    <x-content :header="'Módulo de usuários'">
+    <x-content :header="__('users::module.title')">
     
-        @if (session()->has('message'))
-            <div class="alert alert-success">
-                {{ session('message') }}
-            </div>
-        @endif
+        <x-alert />
         
         @include('users::partials.account-inputs')
         

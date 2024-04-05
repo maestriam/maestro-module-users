@@ -4,10 +4,17 @@ namespace Maestro\Users\Views\Pages;
 
 use Maestro\Admin\Views\MaestroView;
 use Maestro\Users\Database\Models\User;
+use Maestro\Users\Support\Concerns\SearchesUsers;
+use Maestro\Users\Support\Concerns\StoresUsers;
+use Maestro\Users\Support\Concerns\UpdatesUsers;
 use Maestro\Users\Support\Facade\Users;
 
 class UserForm extends MaestroView
 {
+    use StoresUsers, 
+        UpdatesUsers,
+        SearchesUsers;
+
     /**
      * Arquivo de view do componente
      *
@@ -83,9 +90,7 @@ class UserForm extends MaestroView
     {
         $this->setUser($id);
 
-        if (! $this->isEdition()) {
-            return;
-        }
+        if (! $this->isEdition()) return;
 
         $this->edit();
     }
@@ -111,11 +116,9 @@ class UserForm extends MaestroView
      */
     public function edit() : self
     {
-        if ($this->userId == null) {
-            return $this;
-        }
+        if ($this->userId == null) return $this;
 
-        $this->user = Users::user()->findOrFail($this->userId);
+        $this->user = $this->finder()->findOrFail($this->userId);
 
         return $this->load($this->user);
     }
@@ -175,7 +178,7 @@ class UserForm extends MaestroView
      */
     public function update(array $request) : void 
     {
-        Users::user()->update($this->userId, $request);
+        $this->updater()->update($this->userId, $request);
 
         session()->flash('message', 'Post successfully updated.');
     }
@@ -190,7 +193,7 @@ class UserForm extends MaestroView
     {        
         $this->guard($request);
 
-        Users::user()->create($request);
+        $this->creator()->create($request);
 
         session()->flash('message', 'Post successfully created.');
     }
@@ -205,7 +208,7 @@ class UserForm extends MaestroView
      */
     private function guard(array $request) 
     {
-        return Users::user()->validator($request)->validate();
+        return $this->creator()->validator($request)->validate();
     }
 
     /**

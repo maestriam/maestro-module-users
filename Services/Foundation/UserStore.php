@@ -7,12 +7,11 @@ use Illuminate\Support\Facades\Hash;
 use Maestro\Users\Database\Models\User;
 use Maestro\Accounts\Support\Facades\Accounts;
 use Maestro\Users\Http\Requests\StoreUserRequest;
-
-use Maestro\Users\Support\Concerns\StorageFunctions;
+use Maestro\Admin\Support\Concerns\HandlesRequests;
 
 class UserStore 
 {
-    use StorageFunctions;
+    use HandlesRequests;
 
     /**
      * Undocumented variable

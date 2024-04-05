@@ -2,16 +2,20 @@
 
 namespace Maestro\Users\Views\Pages;
 
-use Livewire\WithPagination;
 use Illuminate\Contracts\View\View;
 use Maestro\Admin\Views\MaestroView;
-use Maestro\Users\Support\Concerns\FiresUserDeleteModal;
 use Maestro\Users\Support\Facade\Users;
+use Maestro\Users\Support\Concerns\DeletesUsers;
+use Maestro\Users\Support\Concerns\SearchesUsers;
+use Maestro\Users\Support\Concerns\FiresUserDeleteModal;
+use Maestro\Admin\Support\Concerns\WithPaginationComponent;
 
 class UserIndex extends MaestroView
 {
-    use WithPagination, 
-        FiresUserDeleteModal;
+    use SearchesUsers,
+        DeletesUsers,               
+        FiresUserDeleteModal,
+        WithPaginationComponent;
 
     /**
      * {@inheritDoc}
@@ -42,7 +46,7 @@ class UserIndex extends MaestroView
      */
     public function render() : View
     {
-        $users = $this->getUsers();
+        $users = $this->searchUser();
 
         $collection = ['users' => $users];
 
@@ -50,9 +54,9 @@ class UserIndex extends MaestroView
     }
 
     /**
-     * Undocumented function
+     * Dispara um evento para a exclusão de um usuário na plataforma
      *
-     * @param [type] $id
+     * @param string $id
      * @return void
      */
     public function remove(string $id)
@@ -63,39 +67,25 @@ class UserIndex extends MaestroView
     }
 
     /**
-     * Undocumented function
+     * Retorna uma pesquisa de usuários pelo nome, sobrenome e e-mail
      *
      * @return void
      */
-    private function getUsers()
+    private function searchUser() 
     {   
         return Users::user()->search($this->search)->paginate(10);
     }
-    
-    /**
-     * Undocumented function
-     *
-     * @return void
-     */
-    /*public function updatingSearch()
-    {
-        $this->resetPage();
-    }*/
 
     /**
-     * Undocumented function
+     * Exclui um usuário da base de dados de forma permanente. 
      *
+     * @param [type] $params
      * @return void
      */
-    public function paginationView()
-    {
-        return 'users::partials.pagination';
-    }
-
     public function removeUser($params)
     {
         $values = (object) $params;
 
-        Users::user()->delete($values->userId);
+        $this->destroyer()->delete($values->userId);
     }
 }
