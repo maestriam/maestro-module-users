@@ -21,7 +21,7 @@ class AdminSeeder extends Seeder
             'lastName'              => 'Admin',
             'accountName'           => 'admin',
             'email'                 => 'admin@admin',
-            'password'              => $password,
+            'password'              => $password, 
             'password_confirmation' => $password
         ]);
     }

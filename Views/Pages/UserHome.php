@@ -13,8 +13,6 @@ class UserHome extends MaestroView
 
     public function render()
     {        
-        $this->emitUp('user_login', 'xxxxxxx');
-
         return $this->renderView();
     }
 }

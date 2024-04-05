@@ -9,10 +9,7 @@
         <x-content-card :padding="0" :title="__('users::cards.list-user')">
             
             <x-slot:filters>
-                <x-search-filter-input 
-                :model="'search'" 
-                :placeholder="__('users::placeholders.search')"
-                /> 
+                <x-search-filter-input :placeholder="__('users::placeholders.search')"/> 
             </x-slot>   
             
             <x-slot:actions>         

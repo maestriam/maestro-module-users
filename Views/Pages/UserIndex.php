@@ -77,10 +77,10 @@ class UserIndex extends MaestroView
      *
      * @return void
      */
-    public function updatingSearch()
+    /*public function updatingSearch()
     {
         $this->resetPage();
-    }
+    }*/
 
     /**
      * Undocumented function

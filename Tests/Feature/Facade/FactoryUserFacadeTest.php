@@ -15,11 +15,12 @@ class FactoryUserFacadeTest extends TestCase
      */
     public function testCreateModelUser()
     {
+        $expected = "1";
+
         $user = Users::factory()->model();
 
-        $this->assertIsInt($user->id);
-
         $this->assertGreaterThan(0, $user->id);
+        $this->assertEquals($user->id, $expected);
     }
 
     /**
@@ -29,13 +30,13 @@ class FactoryUserFacadeTest extends TestCase
      * @return void
      */
     public function testFakeLogin()
-    {
+    {         
+        $expected = "1";
+
         $user = Users::factory()->login();
+        $logged = Users::auth()->isLogged();        
 
-        $logged = Users::auth()->isLogged();
-
-        $this->assertIsInt($user->id);
-        
         $this->assertTrue($logged);
+        $this->assertEquals($user->id, $expected);        
     }
 }
