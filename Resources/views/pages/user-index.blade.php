@@ -37,7 +37,7 @@
                             <x-avatar :width="40"/>
                         </x-td>
 
-                        <x-td>
+                        <x-td>                            
                             {{ $user->firstName . ' ' . $user->lastName }}
                             @include('users::partials.user-options', ['id' => $user->id])
                         </x-td>

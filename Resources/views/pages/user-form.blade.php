@@ -1,7 +1,9 @@
 <div>    
     <x-content :header="__('users::module.title')">
-    
-        <x-alert />
+
+        <x-alert />    
+        
+        <livewire:accounts.account-form wire:model="account" :entity="$user"/>
         
         @include('users::partials.account-inputs')
         

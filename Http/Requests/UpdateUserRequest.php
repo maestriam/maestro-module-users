@@ -13,10 +13,11 @@ class UpdateUserRequest extends FormRequest
     public function rules() : array
     {
         return [
-            'firstName'   => 'string',
-            'lastName'    => 'string',
-            'email'       => 'email',
-            'password'    => 'confirmed',
+            'firstName'   => 'required|string',
+            'lastName'    => 'required|string',
+            'email'       => 'required|email',
+            'password'    => 'required|confirmed',
+            'accountName' => 'required|accounts.unique'
         ];
     }
 

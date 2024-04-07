@@ -2,6 +2,7 @@
 
 namespace Maestro\Users\Views\Pages;
 
+use Maestro\Accounts\Support\Concerns\SendsAccountErrors;
 use Maestro\Admin\Views\MaestroView;
 use Maestro\Users\Database\Models\User;
 use Maestro\Users\Support\Concerns\SearchesUsers;
@@ -11,7 +12,8 @@ use Maestro\Users\Support\Facade\Users;
 
 class UserForm extends MaestroView
 {
-    use StoresUsers, 
+    use StoresUsers,
+        SendsAccountErrors, 
         UpdatesUsers,
         SearchesUsers;
 
@@ -43,7 +45,7 @@ class UserForm extends MaestroView
      *
      * @var string
      */
-    public string $accountName = '';
+    public string $account = '';
 
     /**
      * E-mail do usuário.
@@ -135,7 +137,7 @@ class UserForm extends MaestroView
         $this->email           = $user->email;
         $this->firstName       = $user->firstName;
         $this->lastName        = $user->lastName;
-        $this->accountName     = $user->account()->name;
+        $this->account         = $user->account()->name;
         $this->password        = $user->password;
         $this->passwordConfirm = $user->password; 
 
@@ -178,6 +180,10 @@ class UserForm extends MaestroView
      */
     public function update(array $request) : void 
     {
+        $request['entity'] = $this->user;
+
+        $this->guard($request);
+
         $this->updater()->update($this->userId, $request);
 
         session()->flash('message', 'Post successfully updated.');
@@ -208,7 +214,13 @@ class UserForm extends MaestroView
      */
     private function guard(array $request) 
     {
-        return $this->creator()->validator($request)->validate();
+        $validator = $this->creator()->validator($request);
+
+        if ($validator->fails()) {
+            $this->dispatchAccountError($validator->errors(), 'accountName');
+        }
+
+        return $validator->validate();
     }
 
     /**
@@ -223,14 +235,14 @@ class UserForm extends MaestroView
             'email'                 => $this->email,
             'firstName'             => $this->firstName,
             'lastName'              => $this->lastName,
-            'accountName'           => $this->accountName, 
+            'accountName'           => $this->account, 
             'password'              => $this->password,
             'password_confirmation' => $this->passwordConfirm
         ];
     }
 
     /**
-     * Undocumented function
+     * Define o ID do usuário
      *
      * @param integer $id
      * @return self
