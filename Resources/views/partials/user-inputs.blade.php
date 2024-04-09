@@ -1,4 +1,4 @@
-<x-content-card :title="__('users::cards.data-user')">
+<x-content-card :title="__('users::cards.user-data')">
     <x-row>
         <x-form-group :cols="6">
             <x-input 

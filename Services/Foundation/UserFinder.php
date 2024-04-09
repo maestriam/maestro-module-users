@@ -22,7 +22,7 @@ class UserFinder
      * Retorna um usuário pelo seu ID.
      *
      * @param int $id  
-     * @return object
+     * @return \Maestro\Users\Database\Models\User
      */
     public function find(int $id) : User
     {

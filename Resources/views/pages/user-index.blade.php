@@ -20,46 +20,56 @@
             
             <x-table>
                 <x-tr>
-                    <x-th :cols="2">{{ __('users::tables.name') }}</x-th>
+                    <x-th :width="'95'">&nbsp;<x-spinner /></x-th>
+                    <x-th>{{ __('users::tables.name') }}</x-th>
                     <x-th>{{ __('users::tables.email') }}</x-th>
                     <x-th>{{ __('users::tables.accountname') }}</x-th>
                     <x-th>{{ __('users::tables.created-at') }}</x-th>
                 </x-tr>
                 
-                @foreach($users as $user)
-                
-                    @if (! isset($user->id) || ! $user->account())
-                    @continue
-                    @endif
-                
-                    <x-tr>
-                        <x-td width="10">
-                            <x-avatar :width="40"/>
-                        </x-td>
 
-                        <x-td>                            
-                            {{ $user->firstName . ' ' . $user->lastName }}
-                            @include('users::partials.user-options', ['id' => $user->id])
+                @if($users->isEmpty())
+                    <x-tr>
+                        <x-td :cols="5">
+                            <x-admin::empty-state />
                         </x-td>
-                        
-                        <x-td>{{ $user->email }}</x-td>
-                        
-                        <x-td>{{ '@'. $user->account()->name }}</x-td>
-                        
-                        <x-td>{{ $user->createdAt }}</x-td>            
                     </x-tr>
-                @endforeach
+                @else
+
+                    @foreach($users as $user)
+                    
+                        @if (! isset($user->id) || ! $user->account())
+                        @continue
+                        @endif
+                    
+                        <x-tr>
+                            <x-td width="10">
+                                <x-avatar :width="40"/>
+                            </x-td>
+
+                            <x-td>                                                       
+                                {{ $user->firstName . ' ' . $user->lastName }}
+                                
+                                @include('users::partials.user-actions', ['user' => $user])
+                            </x-td>
+                            
+                            <x-td>{{ $user->email }}</x-td>
+                            
+                            <x-td>{{ '@'. $user->account()->name }}</x-td>
+                            
+                            <x-td>{{ ddmmYYYY($user->createdAt) }}</x-td>            
+                        </x-tr>
+                    @endforeach
+                @endif
             </x-table> 
             
+            @if(! $users->isEmpty())
             <x-slot:footer>
                 {{ $users->links() }}
             </x-slot:footer>
+            @endif
             
         </x-content-card>
     
     </x-content>
 </div>
-
-@push('scripts')
-    <script src="{{ asset('maestro/users/js/modal.js') }}"></script>
-@endpush
