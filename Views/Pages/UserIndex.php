@@ -4,13 +4,12 @@ namespace Maestro\Users\Views\Pages;
 
 use Illuminate\Contracts\View\View;
 use Maestro\Admin\Views\MaestroView;
+use Maestro\Users\Database\Models\User;
 use Maestro\Users\Support\Facade\Users;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Maestro\Users\Support\Concerns\DeletesUsers;
 use Maestro\Users\Support\Concerns\SearchesUsers;
-use Maestro\Users\Support\Concerns\FiresUserDeleteModal;
 use Maestro\Admin\Support\Concerns\WithPaginationComponent;
-use Maestro\Users\Database\Models\User;
 
 class UserIndex extends MaestroView
 {
@@ -72,7 +71,7 @@ class UserIndex extends MaestroView
     }
 
     /**
-     * Undocumented function
+     * Resgata os dados do usuário para realizar operações de exclusão
      *
      * @param User $user
      * @return User
@@ -161,5 +160,5 @@ class UserIndex extends MaestroView
             'position'         => 'bottom-end',
             'timerProgressBar' => true,
         ]);
-    }
+    }    
 }

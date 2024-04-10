@@ -12,18 +12,18 @@ use Maestro\Admin\Support\Concerns\HasSearch;
 
 class User extends Model
 {
-    use HasFactory, CamelAttributes, HasAccount, HasSearch;
+    use CamelAttributes, HasFactory, HasAccount, HasSearch;
     
     protected $dispatchesEvents = [
         'deleting' => DeletingUser::class
     ];
 
     protected $searchable = [
-        'email', 'first_name', 'last_name', 
+        'email', 'first_name:last_name', 
     ];
         
     protected static function newFactory()
     {
         return UserFactory::new();
-    }    
+    }
 }
