@@ -7,7 +7,7 @@ return [
     'lastName' => [
         'required' => 'O campo "último nome" é obrigatório.'
     ],
-    'username' => [
+    'accountName' => [
         'required' => 'O campo "username" é obrigatório.',
         'unique'   => 'A conta enviada já está em utilização.',
     ],

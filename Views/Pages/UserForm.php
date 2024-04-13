@@ -2,13 +2,15 @@
 
 namespace Maestro\Users\Views\Pages;
 
-use Maestro\Accounts\Support\Concerns\SendsAccountErrors;
 use Maestro\Admin\Views\MaestroView;
 use Maestro\Users\Database\Models\User;
-use Maestro\Users\Support\Concerns\SearchesUsers;
 use Maestro\Users\Support\Concerns\StoresUsers;
 use Maestro\Users\Support\Concerns\UpdatesUsers;
-use Maestro\Users\Support\Facade\Users;
+use Maestro\Users\Support\Concerns\SearchesUsers;
+use Livewire\Features\SupportRedirects\Redirector;
+use Maestro\Users\Exceptions\UserNotFoundException;
+use Maestro\Accounts\Support\Concerns\SendsAccountErrors;
+
 
 class UserForm extends MaestroView
 {
@@ -67,7 +69,7 @@ class UserForm extends MaestroView
      *
      * @var string
      */
-    public string $passwordConfirm = '';
+    public string $confirmPassword = '';
 
     /**
      * Dados do usuário
@@ -85,16 +87,19 @@ class UserForm extends MaestroView
 
     /**
      * Evento executado ao iniciar os atributos.
-     *
+     * 
+     * @todo Deve ser alterado futuramente para permitir string (pesquisa por account)
      * @return void
      */
-    public function mount(int $id = null) 
-    {
-        $this->setUser($id);
+    public function mount(int|string $id = null) 
+    {  
+        if ($id == null) return;
 
-        if (! $this->isEdition()) return;
-
-        $this->edit();
+        if ((int) $id == 0) {
+            return redirect()->route('maestro.users.index');
+        }
+        
+        return $this->setUser($id)->edit();
     }
 
     /**
@@ -116,13 +121,21 @@ class UserForm extends MaestroView
      * @param integer|null $id
      * @return self
      */
-    public function edit() : self
+    public function edit() : self|Redirector 
     {
-        if ($this->userId == null) return $this;
+        if ($this->userId == null) {
+            return $this;
+        }
 
-        $this->user = $this->finder()->findOrFail($this->userId);
+        try {
 
-        return $this->load($this->user);
+            $this->user = $this->finder()->findOrFail($this->userId);
+            
+            return $this->load($this->user);
+
+        } catch (UserNotFoundException $e) {
+            return redirect()->route('maestro.users.index');
+        }
     }
 
     /**
@@ -139,7 +152,7 @@ class UserForm extends MaestroView
         $this->lastName        = $user->lastName;
         $this->account         = $user->account()->name;
         $this->password        = $user->password;
-        $this->passwordConfirm = $user->password; 
+        $this->confirmPassword = $user->password; 
 
         return $this;
     }
@@ -237,7 +250,7 @@ class UserForm extends MaestroView
             'lastName'              => $this->lastName,
             'accountName'           => $this->account, 
             'password'              => $this->password,
-            'password_confirmation' => $this->passwordConfirm
+            'password_confirmation' => $this->confirmPassword
         ];
     }
 
@@ -249,8 +262,6 @@ class UserForm extends MaestroView
      */
     private function setUser(int $id = null) : self
     {
-        if ($id == null) return $this;    
-
         $this->userId = $id;
         
         return $this;

@@ -13,7 +13,7 @@ class UserDestroyer
      * Exclui um usuário da base de dados, de acordo com seu ID.  
      *
      * @param int $id
-     * @return  
+     * @return int
      */
     public function delete(int|User $target) : int
     {

@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'search' => 'Pesquisar...'
+    'search' => 'Pesquisar por nome, sobrenome ou e-mail...'
 ];

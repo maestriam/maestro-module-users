@@ -11,7 +11,7 @@ class GetAllUserFacadeTest extends TestCase
     public function testGetAllUsers()
     {
         $count = 10;
-
+        
         $this->populate($count);
 
         $all = Users::user()->all();

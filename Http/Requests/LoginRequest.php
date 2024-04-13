@@ -11,7 +11,7 @@ class LoginRequest extends FormRequest
      * 
      * @var string
      */
-    private string $lang = 'users::validation';
+    private string $source = 'users::validation';
 
     /**
      * Determine if the user is authorized to make this request.
@@ -31,17 +31,17 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'password'  => 'required',
-            'email'     => 'required|email',
+            'password' => 'required',
+            'email'    => 'required|email',
         ];
     }
 
     public function messages() : array
     {
         return [
-            'email.email'       => __($this->lang . '.email.email'),
-            'email.required'    => __($this->lang . '.email.required'),
-            'password.required' => __($this->lang . '.password.required'),
+            'email.email'       => __("{$this->source}.email.email"),
+            'email.required'    => __("{$this->source}.email.required"),
+            'password.required' => __("{$this->source}.password.required"),
         ];
     }
 }

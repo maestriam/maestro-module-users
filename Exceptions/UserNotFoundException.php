@@ -2,6 +2,8 @@
 
 namespace Maestro\Users\Exceptions;
 
+use Maestro\Admin\Exceptions\BaseException;
+
 class UserNotFoundException extends BaseException
 {
     const CODE = '0102';
@@ -21,7 +23,7 @@ class UserNotFoundException extends BaseException
      */
     public function getErrorMessage(): string
     {
-        return "Not possible to found user by id = $this->id.";
+        return "Not possible to found user by id = %s.";
     }
 
     /**

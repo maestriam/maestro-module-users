@@ -22,9 +22,9 @@ class UserFinder
      * Retorna um usuário pelo seu ID.
      *
      * @param int $id  
-     * @return \Maestro\Users\Database\Models\User
+     * @return \Maestro\Users\Database\Models\User|null
      */
-    public function find(int $id) : User
+    public function find(int $id) : ?User
     {
         return User::find($id);
     }

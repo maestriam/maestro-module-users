@@ -2,15 +2,15 @@
 
 namespace Maestro\Users\Database\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Maestro\Users\Services\Events\DeletingUser;
 use Maestro\Users\Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Maestro\Accounts\Support\Concerns\HasAccount;
 use Maestro\Admin\Support\Concerns\CamelAttributes;
 use Maestro\Admin\Support\Concerns\HasSearch;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class User extends Authenticatable
 {
     use CamelAttributes, HasFactory, HasAccount, HasSearch;
     

@@ -13,7 +13,7 @@
             <x-input 
                 :label="'Confirmar senha'" 
                 :type="'password'" 
-                :model="'passwordConfirm'" />
+                :model="'confirmPassword'" />
         </x-form-group>  
     </x-row>
 </x-content-card>

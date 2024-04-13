@@ -7,13 +7,20 @@ use Maestro\Users\Support\Facade\Users;
 
 class DeleteUserFacadeTest extends TestCase
 {
-    public function testDeleteUser()
+    public function testDeleteUserById()
     {
-        $request = Users::factory()->fromRequest();
-
-        $user = Users::user()->create($request);
+        $user = Users::factory()->model();
 
         $deleted = Users::user()->delete($user->id);
+
+        $this->assertEquals(1, $deleted);
+    }
+
+    public function testDeleteUserByModel()
+    {
+        $user = Users::factory()->model();
+
+        $deleted = Users::user()->delete($user);
 
         $this->assertEquals(1, $deleted);
     }

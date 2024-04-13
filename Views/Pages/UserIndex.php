@@ -7,6 +7,7 @@ use Maestro\Admin\Views\MaestroView;
 use Maestro\Users\Database\Models\User;
 use Maestro\Users\Support\Facade\Users;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\On;
 use Maestro\Users\Support\Concerns\DeletesUsers;
 use Maestro\Users\Support\Concerns\SearchesUsers;
 use Maestro\Admin\Support\Concerns\WithPaginationComponent;
@@ -17,6 +18,8 @@ class UserIndex extends MaestroView
         DeletesUsers,        
         LivewireAlert,
         WithPaginationComponent;
+
+    
 
     /**
      * Campo de busca para filtrar registros na tabela de usuarios
@@ -38,15 +41,6 @@ class UserIndex extends MaestroView
     protected User $selected;
 
     /**
-     * Lista de eventos disparados neste componente
-     *
-     * @var array
-     */
-    public $listeners = [
-        'deleteUser'
-    ];
-
-    /**
      * Redireciona para a pagina de lista de usuários
      *
      * @return void
@@ -61,6 +55,7 @@ class UserIndex extends MaestroView
      * 
      * @return View
      */
+    #[On('user-deleted')]
     public function render() : View
     {
         $users = $this->searchUser();
@@ -86,16 +81,6 @@ class UserIndex extends MaestroView
     }
 
     /**
-     * Retorna os dados do usuário
-     *
-     * @return User
-     */
-    private function getSelected() : User
-    {
-        return session('selected-user');
-    }
-
-    /**
      * Dispara um evento para a exclusão de um usuário na plataforma
      *
      * @param string $id
@@ -118,20 +103,6 @@ class UserIndex extends MaestroView
             'denyButtonText'    => __('users::modals.delete.deny'),
             'confirmButtonText' => __('users::modals.delete.confirm'),            
         ]);
-    }
-
-    /**
-     * Retorna a mensagem do modal de exclusão de usuário, 
-     * personalizada com o nome do usuário a ser excluído.
-     *
-     * @param User $user
-     * @return string
-     */
-    private function getDeleteMessage(User $user) : string
-    {
-        $name = "{$user->firstName} {$user->lastName}";
-
-        return sprintf(__('users::modals.delete.text'), $name);
     }
 
     /**

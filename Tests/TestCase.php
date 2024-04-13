@@ -25,13 +25,17 @@ class TestCase extends MainTestCase
      * determinada quantidade de usuários.
      *
      * @param integer $count
-     * @return void
+     * @return array
      */
-    protected function populate(int $count = 1) : void
+    protected function populate(int $count = 1) : array
     {
+        $collection = [];
+
         for ($i=1; $i <= $count; $i++) { 
-            Users::factory()->model();
+            $collection[] = Users::factory()->model();
         }
+
+        return $collection;
     }
 
 }

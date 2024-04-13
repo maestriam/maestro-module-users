@@ -20,8 +20,7 @@
             
             <x-table>
                 <x-tr>
-                    <x-th :width="'95'">&nbsp;<x-spinner /></x-th>
-                    <x-th>{{ __('users::tables.name') }}</x-th>
+                    <x-th :cols="2">{{ __('users::tables.name') }}</x-th>
                     <x-th>{{ __('users::tables.email') }}</x-th>
                     <x-th>{{ __('users::tables.accountname') }}</x-th>
                     <x-th>{{ __('users::tables.created-at') }}</x-th>
@@ -50,7 +49,7 @@
                             <x-td>                                                       
                                 {{ $user->firstName . ' ' . $user->lastName }}
                                 
-                                @include('users::partials.user-actions', ['user' => $user])
+                                <livewire:user-action-box :user="$user" wire:key="{{ Str::uuid() }}" />
                             </x-td>
                             
                             <x-td>{{ $user->email }}</x-td>

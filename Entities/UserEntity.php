@@ -47,7 +47,7 @@ class UserEntity
     /**
      * {@inheritdoc}
      */
-    public function delete(int $user) : int
+    public function delete(int|User $user) : int
     {
         return $this->destroyer()->delete($user);
     }
@@ -63,7 +63,7 @@ class UserEntity
     /**
      * {@inheritdoc}
      */
-    public function find(int $id) : User
+    public function find(int $id) : ?User
     {
         return $this->finder()->find($id);
     }

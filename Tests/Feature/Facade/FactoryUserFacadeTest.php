@@ -2,6 +2,8 @@
 
 namespace Maestro\Users\Tests\Feature\Facade;
 
+use Maestro\Users\Database\Models\User;
+use Maestro\Users\Http\Requests\StoreUserRequest;
 use Maestro\Users\Support\Facade\Users;
 use Maestro\Users\Tests\TestCase;
 
@@ -15,8 +17,7 @@ class FactoryUserFacadeTest extends TestCase
      */
     public function testCreateModelUser()
     {
-        $expected = "1";
-
+        $expected = 1;
         $user = Users::factory()->model();
 
         $this->assertGreaterThan(0, $user->id);
@@ -24,8 +25,32 @@ class FactoryUserFacadeTest extends TestCase
     }
 
     /**
-     * Deve retornar um mock de request de criação de usuário,
-     * já logado dentro do sistema. 
+     * Deve retornar um mock de um objeto request
+     *
+     * @return void
+     */
+    public function testFromRequest()
+    {
+        $request = Users::factory()->fromRequest();
+
+        $this->assertInstanceOf(StoreUserRequest::class, $request);
+    }
+
+    /**
+     * Deve retornar um usuário logado no sistema para testes
+     *
+     * @return void
+     */
+    public function testLogin()
+    {
+        $user = Users::factory()->login();
+
+        $this->assertInstanceOf(User::class, $user);
+        $this->assertEquals($user->id, 1);
+    }
+
+    /**
+     * Deve retornar um mock de um usuário já logado dentro do sistema. 
      *
      * @return void
      */
