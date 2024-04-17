@@ -2,12 +2,13 @@
 
 namespace Maestro\Users\Views\Pages;
 
+use Livewire\Attributes\On;
+use Livewire\Attributes\Url;
 use Illuminate\Contracts\View\View;
 use Maestro\Admin\Views\MaestroView;
 use Maestro\Users\Database\Models\User;
 use Maestro\Users\Support\Facade\Users;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use Livewire\Attributes\On;
 use Maestro\Users\Support\Concerns\DeletesUsers;
 use Maestro\Users\Support\Concerns\SearchesUsers;
 use Maestro\Admin\Support\Concerns\WithPaginationComponent;
@@ -17,15 +18,14 @@ class UserIndex extends MaestroView
     use SearchesUsers,
         DeletesUsers,        
         LivewireAlert,
-        WithPaginationComponent;
-
-    
+        WithPaginationComponent;    
 
     /**
      * Campo de busca para filtrar registros na tabela de usuarios
      *
      * @var string
      */
+    #[Url(as: 'q', except: '')]
     public string $search = '';
 
     /**
@@ -112,6 +112,10 @@ class UserIndex extends MaestroView
      */
     private function searchUser() 
     {   
+        if ($this->search != null) {
+            $this->resetPage();
+        }
+
         return Users::user()->search($this->search)->paginate(10);
     }
 

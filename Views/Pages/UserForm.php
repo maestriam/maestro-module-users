@@ -11,7 +11,6 @@ use Livewire\Features\SupportRedirects\Redirector;
 use Maestro\Users\Exceptions\UserNotFoundException;
 use Maestro\Accounts\Support\Concerns\SendsAccountErrors;
 
-
 class UserForm extends MaestroView
 {
     use StoresUsers,
@@ -96,7 +95,7 @@ class UserForm extends MaestroView
         if ($id == null) return;
 
         if ((int) $id == 0) {
-            return redirect()->route('maestro.users.index');
+            return redirect()->route('maestro.admin.not-found');
         }
         
         return $this->setUser($id)->edit();
@@ -134,7 +133,7 @@ class UserForm extends MaestroView
             return $this->load($this->user);
 
         } catch (UserNotFoundException $e) {
-            return redirect()->route('maestro.users.index');
+            return redirect()->route('maestro.admin.not-found');
         }
     }
 
@@ -150,10 +149,10 @@ class UserForm extends MaestroView
         $this->email           = $user->email;
         $this->firstName       = $user->firstName;
         $this->lastName        = $user->lastName;
-        $this->account         = $user->account()->name;
         $this->password        = $user->password;
         $this->confirmPassword = $user->password; 
-
+        $this->account         = $user->account()->name;
+        
         return $this;
     }
 

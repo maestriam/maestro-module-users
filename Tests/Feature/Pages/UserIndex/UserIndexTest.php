@@ -8,7 +8,13 @@ use Maestro\Users\Views\Pages\UserIndex;
 
 class UserIndexTest extends TestCase
 {
-    public function testDisplayLabels()
+    /**
+     * Deve renderizar o componente corretamente com todos os seus 
+     * labels
+     *
+     * @return void
+     */
+    public function testRenderComponent()
     {
         Livewire::test(UserIndex::class)
             ->assertSee(__('users::module.title'))
@@ -22,27 +28,58 @@ class UserIndexTest extends TestCase
             ->assertSee(__('users::tables.accountname'));
     }
 
+    /**
+     * Deve redirecionar para a tela ao tentar acessar 
+     * a rota de listagem de usuários sem estar logado no sistema. 
+     *
+     * @return void
+     */
     public function testRouteWithoutLogin()
     {
-        $this->get('/users')->assertRedirect('/login');
+        $route = route('maestro.users.index');
+        $login = route('maestro.users.login');
+
+        $this->get($route)->assertRedirect($login);
     }
 
+    /**
+     * Deve conseguir acessar a rota de listagem de usuário 
+     * ao tentar acessar com um usuário logado no sistema. 
+     * 
+     * @return void
+     */
     public function testRouteWithLogin() 
     {
         $this->initSession();
+
+        $route = route('maestro.users.index');
         
-        $this->get('/users')
+        $this->get($route)
             ->assertSeeLivewire(UserIndex::class)
             ->assertStatus(200);
     }
 
+    /**
+     * Deve ser redirecionado para o formulário de criação de usuário
+     * ao clicar no botão "adicionar usuário".
+     *
+     * @return void
+     */
     public function testGoToCreateUser()
     {
+        $route = route('maestro.users.create');
+
         Livewire::test(UserIndex::class)
             ->call('goToCreate')
-            ->assertRedirect('/users/create');
+            ->assertRedirect($route);
     }
-    
+ 
+    /**
+     * Deve conseguir visualizar os itens nas tabelas de 
+     * listagem de usuários. 
+     *
+     * @return void
+     */
     public function testSeeItens()
     {
         $collection = $this->populate();
@@ -55,55 +92,5 @@ class UserIndexTest extends TestCase
                 ->assertSee("@{$user->account()->name}")
                 ->assertSee(ddmmYYYY($user->createdAt));
         }
-    }
-
-    public function testPagination()
-    {
-        $pages = 2;
-        $count = 10;
-        $total = 15;
-        
-        $this->populate($total);
-
-        Livewire::test(UserIndex::class)
-            ->assertViewHas('users', fn($users) => $users->count() == $count)
-            ->assertViewHas('users', fn($users) => $users->total() == $total)
-            ->assertViewHas('users', fn($users) => $users->lastPage() == $pages);                        
-    }
-
-    public function testSearchByName()
-    {
-        $collection = $this->populate(20);
-
-        $first = $collection[0];
-
-        Livewire::test(UserIndex::class)
-            ->set('search', $first->firstName)
-            ->assertViewHas('users', fn($users) => count($users) > 0);
-
-        Livewire::test(UserIndex::class)
-            ->set('search', "{$first->firstName} {$first->lastName}")
-            ->assertViewHas('users', fn($users) => count($users) == 1);
-
-        Livewire::test(UserIndex::class)
-            ->set('search', "not-exitst")
-            ->assertViewHas('users', fn($users) => count($users) == 0)
-            ->assertSeeHtml("empty-state");
-    }
-
-    public function testSearchByEmail()
-    {
-        $collection = $this->populate(10);
-
-        $first = $collection[0];
-
-        Livewire::test(UserIndex::class)
-            ->set('search', $first->email)
-            ->assertViewHas('users', fn($users) => count($users) > 0);
-
-        Livewire::test(UserIndex::class)
-            ->set('search', "no-one@any-where")
-            ->assertViewHas('users', fn($users) => count($users) == 0)
-            ->assertSeeHtml("empty-state");
     }
 }

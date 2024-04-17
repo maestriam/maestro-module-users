@@ -74,7 +74,7 @@ class UserEditingTest extends TestCase
 
         $route = route('maestro.users.edit', ['id' => 123]);
 
-        $notfound = route('maestro.users.index');
+        $notfound = route('maestro.admin.not-found');
 
         return $this->get($route)->assertRedirect($notfound);
     }
@@ -90,7 +90,7 @@ class UserEditingTest extends TestCase
     {
         $this->initSession();
 
-        $notfound = route('maestro.users.index');
+        $notfound = route('maestro.admin.not-found');
 
         $string  = route('maestro.users.edit', ['id' => 'maestro']);
         $special = route('maestro.users.edit', ['id' => '@$pec1a$al']);
