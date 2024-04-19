@@ -45,45 +45,4 @@ class UserFinder
         
         return $user;
     }
-
-    /**
-     * Retorna uma lista de usuários
-     *
-     * @param Collection $users
-     * @return array
-     */
-    private function toList(Collection $users) : array
-    {
-        $list = [];
-
-        foreach($users as $user) {
-
-            $object = $this->toResponse($user);
-
-            array_push($list, $object);
-        }
-
-        return $list;
-    }
-
-    /**
-     * Retorna um objeto com todas os dados principais do usuário.  
-     * 
-     * @param User $user
-     * @return object
-     */
-    private function toResponse(User $user) : object
-    {
-        $user = [
-            'id'          => $user->id,
-            'firstName'   => $user->first_name,
-            'lastName'    => $user->last_name,
-            'accountName' => $user->account()->name,
-            'email'       => $user->email,
-            'createdAt'   => $user->created_at->format('d/m/Y H:i'),
-            'updatedAt'   => $user->updated_at->format('d/m/Y H:i'),
-        ];
-
-        return (object) $user;
-    }
 }

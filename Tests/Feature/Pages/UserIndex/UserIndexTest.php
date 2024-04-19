@@ -37,9 +37,8 @@ class UserIndexTest extends TestCase
     public function testRouteWithoutLogin()
     {
         $route = route('maestro.users.index');
-        $login = route('maestro.users.login');
-
-        $this->get($route)->assertRedirect($login);
+        
+        $this->assertRedirectWithoutLogin($route);
     }
 
     /**

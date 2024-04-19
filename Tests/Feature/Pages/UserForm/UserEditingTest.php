@@ -40,10 +40,9 @@ class UserEditingTest extends TestCase
     {
         $user = Users::factory()->model();
 
-        $login = route("maestro.users.login");
-        $form  = route("maestro.users.edit", ['id' => $user->id]);
+        $route = route("maestro.users.edit", ['id' => $user->id]);
 
-        $this->get($form)->assertRedirect($login);
+        $this->assertRedirectWithoutLogin($route);
     }
 
     /**
@@ -76,7 +75,7 @@ class UserEditingTest extends TestCase
 
         $notfound = route('maestro.admin.not-found');
 
-        return $this->get($route)->assertRedirect($notfound);
+        $this->get($route)->assertRedirect($notfound);
     }
 
     /**
