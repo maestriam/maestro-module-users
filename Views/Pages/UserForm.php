@@ -10,11 +10,13 @@ use Maestro\Users\Support\Concerns\SearchesUsers;
 use Livewire\Features\SupportRedirects\Redirector;
 use Maestro\Users\Exceptions\UserNotFoundException;
 use Maestro\Accounts\Support\Concerns\SendsAccountErrors;
+use Maestro\Admin\Support\Concerns\PageRedirections;
 
 class UserForm extends MaestroView
 {
     use StoresUsers,
         SendsAccountErrors, 
+        PageRedirections,
         UpdatesUsers,
         SearchesUsers;
 
@@ -88,14 +90,14 @@ class UserForm extends MaestroView
      * Evento executado ao iniciar os atributos.
      * 
      * @todo Deve ser alterado futuramente para permitir string (pesquisa por account)
-     * @return void
+     * @return self
      */
-    public function mount(int|string $id = null) 
+    public function mount(int|string $id = null) : mixed
     {  
-        if ($id == null) return;
+        if ($id == null) return $this;
 
         if ((int) $id == 0) {
-            return redirect()->route('maestro.admin.not-found');
+            return $this->goToPageNotFound();
         }
         
         return $this->setUser($id)->edit();
@@ -122,18 +124,16 @@ class UserForm extends MaestroView
      */
     public function edit() : self|Redirector 
     {
-        if ($this->userId == null) {
-            return $this;
-        }
-
         try {
+
+            if ($this->userId == null) return $this;
 
             $this->user = $this->finder()->findOrFail($this->userId);
             
             return $this->load($this->user);
 
         } catch (UserNotFoundException $e) {
-            return redirect()->route('maestro.admin.not-found');
+            return $this->goToPageNotFound();
         }
     }
 

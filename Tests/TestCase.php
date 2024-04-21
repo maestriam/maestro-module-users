@@ -3,7 +3,6 @@
 namespace Maestro\Users\Tests;
 
 use Maestro\Users\Support\Facade\Users;
-use Maestro\Users\Http\Requests\StoreUserRequest;
 use Maestro\Admin\Tests\TestCase as MainTestCase;
 
 class TestCase extends MainTestCase

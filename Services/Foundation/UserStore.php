@@ -33,6 +33,7 @@ class UserStore
      */
     public function create(array|StoreUserRequest $input) : User
     {
+        
         $this->guard($input);
         
         $data = $this->getInputData($input);
@@ -57,7 +58,7 @@ class UserStore
         $user->password   = $this->makePassword($data->password);
         
         $user->save();
-
+        
         $this->createAccount($user, $data);
 
         return $user;

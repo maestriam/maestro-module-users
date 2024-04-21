@@ -19,13 +19,13 @@ class UserEditingTest extends TestCase
         $user = Users::factory()->model();
 
         Livewire::test(UserForm::class, ['id' => $user->id])
-            ->assertSee('firstName', $user->firstName)
-            ->assertSee('lastName', $user->lastName)
-            ->assertSee('email', $user->lastName)
-            ->assertSee('account', $user->account()->name)
             ->assertSee(__('users::forms.first-name'))
             ->assertSee(__('users::forms.last-name'))
             ->assertSee(__('users::forms.email'))
+            ->assertViewHas('firstName', $user->firstName)
+            ->assertViewHas('lastName', $user->lastName)
+            ->assertViewHas('email', $user->email)
+            ->assertViewHas('account', $user->account()->name)
             ->assertDontSee(__('users::forms.password.label'))
             ->assertDontSee(__('users::forms.confirm-password'));
     }
