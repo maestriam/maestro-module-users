@@ -47,7 +47,7 @@ class UserUpdater
      */
     public function store(User $user, object $data) : User
     {
-        $user->email     = $data->email ?? $user->email;
+        $user->email      = $data->email ?? $user->email;
         $user->first_name = $data->firstName ?? $user->firstName;
         $user->last_name  = $data->lastName ?? $user->lastName;
 
