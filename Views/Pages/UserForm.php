@@ -175,7 +175,7 @@ class UserForm extends MaestroView
     public function save() 
     {        
         $request = $this->getRequest();
-            
+
         if ($this->isEdition()) {
             return $this->update($request);
         }

@@ -17,11 +17,11 @@ class UserDestroyer
      */
     public function delete(int|User $target) : int
     {
-        $user = $this->getUserOrFail($target);
-            
+        $user = $this->getUserOrFail($target);        
+
         $this->deleteAccount($user);
         
-        $user->delete();
+        $user->forceDelete();
 
         return $user->id;
     }

@@ -4,15 +4,11 @@ namespace Maestro\Users\Services\Providers;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
-use Livewire\Livewire;
-use Maestriam\Maestro\Foundation\Registers\FileRegister;
 use Maestro\Users\Entities\FacadeEntity;
+use Maestriam\Maestro\Foundation\Registers\FileRegister;
+use Maestro\Users\Console\PopulateCommand;
+use Maestro\Users\Console\SetupCommand;
 use Maestro\Users\Http\Middleware\AuthenticatesUsers;
-use Maestro\Users\Views\Components\UserActionBox;
-use Maestro\Users\Views\Pages\UserForm;
-use Maestro\Users\Views\Pages\UserIndex;
-use Maestro\Users\Views\Pages\UserLoginForm;
-use Maestro\Users\Views\Pages\UserView;
 
 class MainServiceProvider extends ServiceProvider
 {
@@ -39,8 +35,8 @@ class MainServiceProvider extends ServiceProvider
         $this->registerSeeds();
         $this->registerFacade();
         $this->registerMiddlewares();
-        $this->registerViewComponents();
         $this->registerMigrations();
+        $this->registerCommands();
     }
 
     /**
@@ -51,6 +47,7 @@ class MainServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+        $this->app->register(ViewServiceProvider::class);
     }
 
     public function registerMiddlewares()
@@ -129,6 +126,19 @@ class MainServiceProvider extends ServiceProvider
     }
 
     /**
+     * Registra os comandos específicos do módulo
+     *
+     * @return void
+     */
+    public function registerCommands()
+    {
+        $this->commands([
+            SetupCommand::class,
+            PopulateCommand::class
+        ]);
+    }
+
+    /**
      * Get the services provided by the provider.
      *
      * @return array
@@ -157,15 +167,6 @@ class MainServiceProvider extends ServiceProvider
         FileRegister::from($path);
 
         return $this;
-    }
-
-    private function registerViewComponents()
-    {
-        Livewire::component('users.pages.view', UserView::class);
-        Livewire::component('users.pages.form', UserForm::class);
-        Livewire::component('users.pages.index', UserIndex::class);        
-        Livewire::component('user-action-box', UserActionBox::class);
-        Livewire::component('users.pages.login', UserLoginForm::class);
     }
 
     private function registerMigrations()
