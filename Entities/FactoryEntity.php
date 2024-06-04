@@ -87,4 +87,16 @@ class FactoryEntity extends UserFactory
             'password_confirmation' => $password
         ];
     }
+
+    
+    public function populate(int $quantity = 10) : array 
+    {
+        $collection = [];
+
+        for ($i=0; $i < $quantity; $i++) { 
+            $collection[] = $this->model();
+        }   
+
+        return $collection;
+    }
 }

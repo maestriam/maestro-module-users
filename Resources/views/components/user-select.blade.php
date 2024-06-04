@@ -1,8 +1,10 @@
-<x-select-filter :model="'user'" :name="'user'">
-    @foreach($this->users as $user):
-        <option value="1">
-            {{ $user->firstName }} {{ $user->lastName }} <br/>
-            ({{ $user->account()->name ?? 'nao tem'}})
-        </option>
-    @endforeach
-</x-select-filter> 
+<x-select :name="'user-select[]'" :model="'selected'" :multiple="true" :id="'user-selected-id'" lazy >
+    @if($this->users != null)
+        @foreach($this->users as $user):
+            <option value="{{ $user->id }}">
+                {{ $user->firstName }} {{ $user->lastName }} <br/>
+                ({{ '@'. $user->account()->name ?? ''}})
+            </option>
+        @endforeach
+    @endif
+</x-select> 

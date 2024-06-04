@@ -4,9 +4,9 @@ namespace Maestro\Users\Exceptions;
 
 use Maestro\Admin\Exceptions\BaseException;
 
-class SessionUserNotFoundException extends BaseException
+class InvalidExcludedUserException extends BaseException
 {
-    const CODE = '0103';
+    const CODE = 'USR-EXC-02';
 
     /**
      * Define as configuração para enviar o exception
@@ -23,7 +23,7 @@ class SessionUserNotFoundException extends BaseException
      */
     public function getErrorMessage(): string
     {
-        return "Not found any user logged in session.";
+        return "The excluded users passed in user select is invalid. Please, check the params informed and try again.";
     }
 
     /**

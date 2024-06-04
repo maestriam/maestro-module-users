@@ -119,8 +119,6 @@ class UserIndex extends MaestroView
         return Users::user()->search($this->search)->paginate(10);
     }
 
-    
-
     /**
      * Exclui um usuário da base de dados de forma permanente. 
      * 

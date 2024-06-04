@@ -1,5 +1,4 @@
-
-<div>
+<div lazy>
     <x-content 
         :padding="0"
         :title="__('users::module.name')" 
@@ -42,20 +41,15 @@
                         @endif
                     
                         <x-tr>
-                            <x-td width="10">
-                                <x-avatar :width="40"/>
-                            </x-td>
+                            <x-td width="10"><x-avatar :width="40"/></x-td>
 
                             <x-td>                                                       
-                                {{ $user->firstName . ' ' . $user->lastName }}
-                                
+                                {{ $user->firstName . ' ' . $user->lastName }}                                
                                 <livewire:user-action-box :user="$user" wire:key="{{ Str::uuid() }}" />
                             </x-td>
                             
-                            <x-td>{{ $user->email }}</x-td>
-                            
-                            <x-td>{{ '@'. $user->account()->name }}</x-td>
-                            
+                            <x-td>{{ $user->email }}</x-td>                            
+                            <x-td>{{ '@'. $user->account()->name }}</x-td>                            
                             <x-td>{{ ddmmYYYY($user->createdAt) }}</x-td>            
                         </x-tr>
                     @endforeach

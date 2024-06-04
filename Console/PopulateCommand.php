@@ -3,11 +3,13 @@
 namespace Maestro\Users\Console;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Artisan;
-use Maestro\Users\Support\Facade\Users;
+use Maestro\Users\Support\Concerns\WithUserFactory;
+
 
 class PopulateCommand extends Command
 {
+    use WithUserFactory;
+
      /**
      * The name and signature of the console command.
      *
@@ -39,17 +41,8 @@ class PopulateCommand extends Command
      */
     public function handle()
     {
-        $this->populate(); 
+        $this->factory()->populate(100);
         
         $this->info('Users created with successful');      
-    }
-
-    private function populate() : self
-    {        
-        for ($i=0; $i < 100; $i++) { 
-            Users::factory()->model();
-        }   
-
-        return $this;
     }
 }

@@ -108,9 +108,7 @@ class UserActionBox extends Component
      */
     private function getDeleteMessage() : string
     {
-        $user = $this->user;
-        
-        $name = "{$user->firstName} {$user->lastName}";
+        $name = "{$this->user->firstName} {$this->user->lastName}";
 
         return sprintf(__('users::modals.delete.text'), $name);
     }

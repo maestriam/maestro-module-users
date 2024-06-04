@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'delete'  => [
+    'delete' => [
         'title'     => 'Atenção!',
         'text'      => 'Essa operação não poderá ser revertida.<br/>Tem certeza que gostaria de excluir os dados de <b>%s</b>?',
         'icon'      => 'warning',
