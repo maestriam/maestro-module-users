@@ -7,4 +7,4 @@
             </option>
         @endforeach
     @endif
-</x-select> 
+</x-select>

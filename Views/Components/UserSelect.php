@@ -19,9 +19,15 @@ class UserSelect extends Component
      * @var [type]
      */
     #[Modelable]
-    public $selected = [];
+    public array $selected = [];
     
-    public $excludes = null; 
+    /**
+     * Lista de usuários que deverão ser excluídos da listagem 
+     * no componente. 
+     *
+     * @var array|Collection
+     */
+    public array|Collection $excludes = []; 
 
     /**
      * Lista de TODOS os usuários cadastrados
@@ -48,7 +54,7 @@ class UserSelect extends Component
      */
     #[On("user-select:refresh")]
     public function refresh(array $params)
-    {        
+    {                
         if (! isset($params['excludes'])) {
             throw new InvalidExcludedUserException();            
         }
