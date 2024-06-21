@@ -1,7 +1,8 @@
 <?php
 
+namespace Maestro\Users\Tests\Feature\Pages\UserIndex;
+
 use Livewire\Livewire;
-use Maestro\Users\Support\Facade\Users;
 use Maestro\Users\Tests\TestCase;
 use Maestro\Users\Views\Pages\UserIndex;
 

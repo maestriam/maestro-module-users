@@ -8,6 +8,11 @@
             "email": "giuguitar@gmail.com"
         }
     ],
+    "scripts": {
+        "post-autoload-dump": [
+            "php artisan module:enable Users"
+        ]
+    },
     "extra": {
         "laravel": {
             "providers": [],

@@ -1,5 +1,7 @@
 <?php
 
+namespace Maestro\Users\Tests\Feature\Facade;
+
 use Maestro\Users\Exceptions\UserNotFoundException;
 use Maestro\Users\Support\Facade\Users;
 use Maestro\Users\Tests\TestCase;
