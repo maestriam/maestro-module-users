@@ -1,11 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Maestro\Users\Views\Pages\UserView;
-use Maestro\Users\Views\Pages\UserIndex;
-use Maestro\Users\Views\Pages\UserForm;
-use Maestro\Users\Views\Pages\UserHome;
-use Maestro\Users\Views\Pages\UserLoginForm;
 
 /*
 |--------------------------------------------------------------------------
