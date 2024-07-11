@@ -1,4 +1,4 @@
-<x-select :name="'user-select[]'" :model="'selected'" :multiple="true" :id="'user-selected-id'" lazy >
+<x-select :name="'user-select[]'" :model="'selected'" :multiple="true" :id="'user-selected-id'" lazy>
     @if($this->users != null)
         @foreach($this->users as $user):
             <option value="{{ $user->id }}">

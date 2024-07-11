@@ -2,6 +2,7 @@
 
 namespace Maestro\Users\Views\Pages;
 
+use Illuminate\Http\RedirectResponse;
 use Maestro\Admin\Views\MaestroView;
 use Maestro\Users\Database\Models\User;
 use Maestro\Users\Support\Concerns\StoresUsers;
@@ -159,7 +160,7 @@ class UserForm extends MaestroView
     /**
      * Redireciona para a pagina de lista de usuários
      *
-     * @return void
+     * @return mixed
      */
     public function back()
     {        

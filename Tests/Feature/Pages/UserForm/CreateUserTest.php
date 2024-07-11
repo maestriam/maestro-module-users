@@ -2,6 +2,7 @@
 
 namespace Maestro\Users\Tests\Feature\Pages\UserForm;
 
+use Livewire\Features\SupportRedirects\Redirector;
 use Livewire\Livewire;
 use Maestro\Users\Tests\TestCase;
 use Maestro\Users\Views\Pages\UserForm;
@@ -103,6 +104,19 @@ class CreateUserTest extends TestCase
             ->assertSee(__("users::validations.password.required"))
             ->assertSee(__("users::validations.lastName.required"))
             ->assertSee(__("users::validations.firstName.required"));
+    }
+
+    /**
+     * Deve redirecionar para a tela de indice de usuários ao clicar
+     * no botão "voltar". 
+     *
+     * @return void
+     */
+    public function testBackButton()
+    {
+        Livewire::test(UserForm::class)
+            ->call("back")
+            ->assertRedirectToRoute("maestro.users.index");
     }
 
     /**

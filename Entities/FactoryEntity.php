@@ -2,6 +2,7 @@
 
 namespace Maestro\Users\Entities;
 
+use Maestro\Admin\Support\Concerns\PopulatesModule;
 use Maestro\Users\Database\Models\User;
 use Maestro\Users\Database\Factories\UserFactory;
 use Maestro\Users\Http\Requests\StoreUserRequest;
@@ -10,7 +11,7 @@ use Maestro\Users\Support\Concerns\StoresUsers;
 
 class FactoryEntity extends UserFactory
 {    
-    use StoresUsers, AuthUsers;
+    use StoresUsers, AuthUsers, PopulatesModule;
 
     /**
      * Finge a criação de um novo usuário no banco de dados
@@ -86,17 +87,5 @@ class FactoryEntity extends UserFactory
             'password'              => $password,
             'password_confirmation' => $password
         ];
-    }
-
-    
-    public function populate(int $quantity = 10) : array 
-    {
-        $collection = [];
-
-        for ($i=0; $i < $quantity; $i++) { 
-            $collection[] = $this->model();
-        }   
-
-        return $collection;
     }
 }
