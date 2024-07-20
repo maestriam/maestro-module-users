@@ -32,8 +32,7 @@ class UserStore
      * @return User             
      */
     public function create(array|StoreUserRequest $input) : User
-    {
-        
+    {   
         $this->guard($input);
         
         $data = $this->getInputData($input);

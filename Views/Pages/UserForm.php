@@ -3,6 +3,7 @@
 namespace Maestro\Users\Views\Pages;
 
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Session;
 use Maestro\Admin\Views\MaestroView;
 use Maestro\Users\Database\Models\User;
 use Maestro\Users\Support\Concerns\StoresUsers;
@@ -199,7 +200,7 @@ class UserForm extends MaestroView
 
         $this->updater()->update($this->userId, $request);
 
-        session()->flash('message', 'Post successfully updated.');
+        Session::flash('message', 'Post successfully updated.');
     }
 
     /**
@@ -214,7 +215,7 @@ class UserForm extends MaestroView
 
         $this->creator()->create($request);
 
-        session()->flash('message', 'Post successfully created.');
+        Session::flash('message', 'Post successfully created.');
     }
 
     /**
