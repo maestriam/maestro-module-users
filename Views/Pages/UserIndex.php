@@ -5,6 +5,7 @@ namespace Maestro\Users\Views\Pages;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Session;
 use Maestro\Admin\Views\MaestroView;
 use Maestro\Users\Database\Models\User;
 use Maestro\Users\Support\Facade\Users;
@@ -75,7 +76,7 @@ class UserIndex extends MaestroView
     {
         $selected = $this->finder()->find($id);
         
-        session()->put('selected-user', $selected);
+        Session::put('selected-user', $selected);
 
         return $selected;
     }
