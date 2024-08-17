@@ -6,7 +6,7 @@ use Illuminate\Routing\Controller;
 use Maestro\Users\Support\Users;
 use Illuminate\Contracts\Support\Renderable;
 
-class UserController extends Controller
+class LogoutController extends Controller
 {
     /**
      * Display a listing of the resource.
