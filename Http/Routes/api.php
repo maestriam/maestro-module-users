@@ -13,7 +13,3 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::middleware('auth:api')->prefix('api/users')->group(function() {
-    Route::get('/', 'UserController@index')->name('maestro.users.index.api');
-});
