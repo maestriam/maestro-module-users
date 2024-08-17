@@ -63,7 +63,7 @@ class UserIndex extends MaestroView
 
         $collection = ['users' => $users];
 
-        return $this->renderView($collection);
+        return $this->renderView($this->view, $collection);
     }
 
     /**
