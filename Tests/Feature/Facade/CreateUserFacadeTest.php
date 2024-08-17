@@ -3,7 +3,7 @@
 namespace Maestro\Users\Tests\Feature\Facade;
 
 use Maestro\Users\Tests\TestCase;
-use Maestro\Users\Support\Facade\Users;
+use Maestro\Users\Support\Users;
 use Maestro\Admin\Exceptions\InvalidRequestException;
 
 class CreateUserFacadeTest extends TestCase
@@ -12,7 +12,7 @@ class CreateUserFacadeTest extends TestCase
     {
         $request = Users::factory()->fromRequest();
 
-        $user = Users::user()->create($request);
+        $user = Users::creator()->create($request);
 
         $this->assertEquals(1, $user->id);
     }
@@ -21,7 +21,7 @@ class CreateUserFacadeTest extends TestCase
     {
         $array = Users::factory()->fromArray();
 
-        $user = Users::user()->create($array);
+        $user = Users::creator()->create($array);
 
         $this->assertEquals(1, $user->id);
     }
@@ -30,6 +30,6 @@ class CreateUserFacadeTest extends TestCase
     {
         $this->expectException(InvalidRequestException::class);
 
-        $user = Users::user()->create([]);
+        $user = Users::creator()->create([]);
     }
 }

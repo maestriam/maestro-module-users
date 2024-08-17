@@ -2,7 +2,7 @@
 
 namespace Maestro\Users\Tests\Feature\Facade;
 
-use Maestro\Users\Support\Facade\Users;
+use Maestro\Users\Support\Users;
 use Maestro\Users\Tests\TestCase;
 
 class IsLoggedUserFacadeTest extends TestCase

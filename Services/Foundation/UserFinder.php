@@ -2,6 +2,7 @@
 
 namespace Maestro\Users\Services\Foundation;
 
+use Illuminate\Database\Eloquent\Builder;
 use Maestro\Users\Database\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Maestro\Users\Exceptions\UserNotFoundException;
@@ -27,6 +28,11 @@ class UserFinder
     public function find(int $id) : ?User
     {
         return User::find($id);
+    }
+
+    public function search(string $search) : Builder
+    {
+        return User::search($search);
     }
 
     /**

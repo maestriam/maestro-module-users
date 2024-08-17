@@ -5,7 +5,7 @@ namespace Maestro\Users\Tests\Unit\Foundation\UserDestroyer;
 use Maestro\Users\Tests\TestCase;
 use Maestro\Users\Support\Concerns\AuthUsers;
 use Maestro\Users\Support\Concerns\DeletesUsers;
-use Maestro\Users\Support\Facade\Users;
+use Maestro\Users\Support\Users;
 
 class DeleteUserTest extends TestCase
 {
@@ -33,6 +33,6 @@ class DeleteUserTest extends TestCase
     {
         $request = Users::factory()->fromRequest();
 
-        return Users::user()->create($request);
+        return Users::creator()->create($request);
     }
 }

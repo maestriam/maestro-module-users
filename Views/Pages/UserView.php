@@ -4,7 +4,7 @@ namespace Maestro\Users\Views\Pages;
 
 use Maestro\Admin\Views\MaestroView;
 use Maestro\Users\Database\Models\User;
-use Maestro\Users\Support\Facade\Users;
+use Maestro\Users\Support\Users;
 
 class UserView extends MaestroView
 {
@@ -53,7 +53,7 @@ class UserView extends MaestroView
      */
     private function setUser(int $id) : self
     {
-        $this->user = Users::user()->find($id);
+        $this->user = Users::finder()->find($id);
 
         return $this;
     }

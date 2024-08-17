@@ -4,11 +4,11 @@ namespace Maestro\Users\Services\Providers;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
-use Maestro\Users\Entities\FacadeEntity;
-use Maestriam\Maestro\Foundation\Registers\FileRegister;
-use Maestro\Users\Console\PopulateCommand;
 use Maestro\Users\Console\SetupCommand;
+use Maestro\Users\Console\PopulateCommand;
 use Maestro\Users\Http\Middleware\AuthenticatesUsers;
+use Maestriam\Maestro\Foundation\Registers\FileRegister;
+use Maestro\Users\Support\Facades\UserFacade;
 
 class MainServiceProvider extends ServiceProvider
 {
@@ -68,7 +68,7 @@ class MainServiceProvider extends ServiceProvider
     protected function registerFacade(): self
     {
         $this->app->bind('users', function () {
-            return new FacadeEntity();
+            return new UserFacade();
         });
 
         return $this;

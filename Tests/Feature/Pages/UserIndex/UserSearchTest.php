@@ -83,7 +83,7 @@ class UserSearchTest extends TestCase
         $request = Users::factory()->fromRequest();
         $request->accountName = "__my-account" ;
 
-        $user = Users::user()->create($request);
+        $user = Users::creator()->create($request);
 
         Livewire::test(UserIndex::class)
             ->set('search', $user->account()->name)

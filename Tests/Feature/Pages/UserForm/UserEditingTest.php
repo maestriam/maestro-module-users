@@ -4,7 +4,7 @@ namespace Maestro\Users\Tests\Feature\Pages\UserForm;
 
 use Livewire\Livewire;
 use Maestro\Users\Tests\TestCase;
-use Maestro\Users\Support\Facade\Users;
+use Maestro\Users\Support\Users;
 use Maestro\Users\Views\Pages\UserForm;
 
 class UserEditingTest extends TestCase

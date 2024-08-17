@@ -3,13 +3,13 @@
 namespace Maestro\Users\Support\Concerns;
 
 use Maestro\Users\Database\Models\User;
-use Maestro\Users\Entities\FactoryEntity;
+use Maestro\Users\Services\Foundation\UserFaker;
 
 trait WithUserFactory
 {
-    public function factory() : FactoryEntity
+    public function factory() : UserFaker
     {
-        return app()->make(FactoryEntity::class);
+        return app()->make(UserFaker::class);
     }    
 
     /**

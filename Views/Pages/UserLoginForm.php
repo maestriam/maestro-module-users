@@ -5,7 +5,7 @@ namespace Maestro\Users\Views\Pages;
 use Maestro\Admin\Views\MaestroView;
 use Illuminate\Support\Facades\Validator;
 use Maestro\Users\Http\Requests\LoginRequest;
-use Maestro\Users\Support\Facade\Users;
+use Maestro\Users\Support\Users;
 
 class UserLoginForm extends MaestroView
 {

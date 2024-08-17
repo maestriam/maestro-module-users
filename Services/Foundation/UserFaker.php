@@ -1,6 +1,6 @@
 <?php
 
-namespace Maestro\Users\Entities;
+namespace Maestro\Users\Services\Foundation;
 
 use Maestro\Admin\Support\Concerns\PopulatesModule;
 use Maestro\Users\Database\Models\User;
@@ -9,7 +9,7 @@ use Maestro\Users\Http\Requests\StoreUserRequest;
 use Maestro\Users\Support\Concerns\AuthUsers;
 use Maestro\Users\Support\Concerns\StoresUsers;
 
-class FactoryEntity extends UserFactory
+class UserFaker extends UserFactory
 {    
     use StoresUsers, AuthUsers, PopulatesModule;
 

@@ -3,7 +3,7 @@
 namespace Maestro\Users\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Maestro\Users\Support\Facade\Users;
+use Maestro\Users\Support\Users;
 
 class AdminSeeder extends Seeder
 {
@@ -16,7 +16,7 @@ class AdminSeeder extends Seeder
     {
         $password = 'admin';
         
-        Users::user()->create([
+        Users::creator()->create([
             'firstName'             => 'Maestro',
             'lastName'              => 'Admin',
             'accountName'           => 'admin',

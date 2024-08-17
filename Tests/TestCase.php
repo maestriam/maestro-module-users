@@ -2,7 +2,7 @@
 
 namespace Maestro\Users\Tests;
 
-use Maestro\Users\Support\Facade\Users;
+use Maestro\Users\Support\Users;
 use Maestro\Admin\Tests\TestCase as MainTestCase;
 use Maestro\Users\Support\Concerns\WithUserFactory;
 

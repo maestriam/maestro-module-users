@@ -3,7 +3,7 @@
 namespace Maestro\Users\Http\Middleware;
  
 use Closure;
-use Maestro\Users\Support\Facade\Users;
+use Maestro\Users\Support\Users;
 
 class AuthenticatesUsers
 {

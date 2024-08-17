@@ -4,7 +4,7 @@ namespace Maestro\Users\Tests\Feature\Facade;
 
 use Maestro\Accounts\Support\Facades\Accounts;
 use Maestro\Users\Tests\TestCase;
-use Maestro\Users\Support\Facade\Users;
+use Maestro\Users\Support\Users;
 
 class DeleteUserFacadeTest extends TestCase
 {
@@ -13,7 +13,7 @@ class DeleteUserFacadeTest extends TestCase
         $user = Users::factory()->model();
         $account = $user->account()->name;
 
-        $deleted = Users::user()->delete($user->id);
+        $deleted = Users::destroyer()->delete($user->id);
         $exists = Accounts::account()->isExists($account);
 
         $this->assertEquals(1, $deleted);
@@ -25,7 +25,7 @@ class DeleteUserFacadeTest extends TestCase
         $user = Users::factory()->model();
         $account = $user->account()->name;
 
-        $deleted = Users::user()->delete($user);
+        $deleted = Users::destroyer()->delete($user);
         $exists = Accounts::account()->isExists($account);
 
         $this->assertEquals(1, $deleted);

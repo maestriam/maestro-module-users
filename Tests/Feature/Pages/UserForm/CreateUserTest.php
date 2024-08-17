@@ -2,11 +2,10 @@
 
 namespace Maestro\Users\Tests\Feature\Pages\UserForm;
 
-use Livewire\Features\SupportRedirects\Redirector;
 use Livewire\Livewire;
 use Maestro\Users\Tests\TestCase;
 use Maestro\Users\Views\Pages\UserForm;
-use Maestro\Users\Support\Facade\Users;
+use Maestro\Users\Support\Users;
 use Livewire\Features\SupportTesting\Testable;
 use Maestro\Users\Http\Requests\StoreUserRequest;
 use Maestro\Accounts\Views\Components\AccountForm;
@@ -39,7 +38,7 @@ class CreateUserTest extends TestCase
         $user = Users::factory()->fromRequest();
         $this->save($user);
        
-        $collection = Users::user()->all();        
+        $collection = Users::finder()->all();        
         $first = $collection->first();     
 
         $this->assertCount(1, $collection);

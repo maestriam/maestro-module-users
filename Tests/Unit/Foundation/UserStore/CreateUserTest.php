@@ -4,7 +4,7 @@ namespace Maestro\Users\Tests\Unit\Foundation\UserStore;
 
 use Maestro\Users\Tests\TestCase;
 use Maestro\Users\Support\Concerns\StoresUsers;
-use Maestro\Users\Support\Facade\Users;
+use Maestro\Users\Support\Users;
 
 class CreateUserTest extends TestCase
 {

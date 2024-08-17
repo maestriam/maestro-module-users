@@ -5,7 +5,7 @@ namespace Maestro\Users\Tests\Feature\Components;
 use Livewire\Livewire;
 use Maestro\Users\Tests\TestCase;
 use Maestro\Users\Database\Models\User;
-use Maestro\Users\Support\Facade\Users;
+use Maestro\Users\Support\Users;
 use Maestro\Users\Views\Components\UserActionBox;
 
 class UserActionBoxTest extends TestCase
@@ -49,7 +49,7 @@ class UserActionBoxTest extends TestCase
 
         $user   = $this->getUser();
         $params = ['user' => $user];
-        $found  = Users::user()->find($user->id);
+        $found  = Users::finder()->find($user->id);
 
         $this->assertNotNull($found);
 
@@ -58,7 +58,7 @@ class UserActionBoxTest extends TestCase
             ->assertDispatched('alert')
             ->assertDispatched($expected);
 
-        $deleted = Users::user()->find($user->id);
+        $deleted = Users::finder()->find($user->id);
 
         $this->assertNull($deleted);
     }    

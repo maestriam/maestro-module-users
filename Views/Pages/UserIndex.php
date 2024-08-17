@@ -8,7 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Session;
 use Maestro\Admin\Views\MaestroView;
 use Maestro\Users\Database\Models\User;
-use Maestro\Users\Support\Facade\Users;
+use Maestro\Users\Support\Users;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Maestro\Users\Support\Concerns\DeletesUsers;
 use Maestro\Users\Support\Concerns\SearchesUsers;
@@ -117,7 +117,7 @@ class UserIndex extends MaestroView
             $this->resetPage();
         }
 
-        return Users::user()->search($this->search)->paginate(10);
+        return $this->finder()->search($this->search)->paginate(10);
     }
 
     /**

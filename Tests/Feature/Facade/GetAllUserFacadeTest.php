@@ -2,9 +2,9 @@
 
 namespace Maestro\Users\Tests\Feature\Facade;
 
-use Maestro\Users\Database\Models\User;
-use Maestro\Users\Support\Facade\Users;
+use Maestro\Users\Support\Users;
 use Maestro\Users\Tests\TestCase;
+use Maestro\Users\Database\Models\User;
 
 class GetAllUserFacadeTest extends TestCase
 {
@@ -14,7 +14,7 @@ class GetAllUserFacadeTest extends TestCase
         
         $this->populate($count);
 
-        $all = Users::user()->all();
+        $all = Users::finder()->all();
 
         $this->assertCount($count, $all);
     }
@@ -22,7 +22,7 @@ class GetAllUserFacadeTest extends TestCase
     public function testFindUser()
     {
         $model = Users::factory()->model();
-        $user  = Users::user()->find($model->id);
+        $user  = Users::finder()->find($model->id);
 
         $this->assertInstanceOf(User::class, $user);
     }

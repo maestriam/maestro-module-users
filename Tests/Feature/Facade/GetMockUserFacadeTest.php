@@ -3,7 +3,7 @@
 namespace Maestro\Users\Tests\Feature\Facade;
 
 use Maestro\Users\Tests\TestCase;
-use Maestro\Users\Support\Facade\Users;
+use Maestro\Users\Support\Users;
 
 class GetMockUserFacadeTest extends TestCase
 {

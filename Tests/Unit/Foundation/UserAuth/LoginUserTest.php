@@ -4,7 +4,7 @@ namespace Maestro\Users\Tests\Unit\Foundation\UserAuth;
 
 use Maestro\Users\Database\Models\User;
 use Maestro\Users\Support\Concerns\AuthUsers;
-use Maestro\Users\Support\Facade\Users;
+use Maestro\Users\Support\Users;
 use Maestro\Users\Tests\TestCase;
 
 class LoginUserTest extends TestCase

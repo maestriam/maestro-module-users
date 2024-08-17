@@ -1,6 +1,6 @@
 <?php
 
-namespace Maestro\Users\Contracts;
+namespace Maestro\Users\Support\Contracts;
 
 use Maestro\Users\Database\Models\User;
 

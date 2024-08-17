@@ -3,7 +3,7 @@
 namespace Maestro\Users\Http\Controllers;
 
 use Illuminate\Routing\Controller;
-use Maestro\Users\Support\Facade\Users;
+use Maestro\Users\Support\Users;
 use Illuminate\Contracts\Support\Renderable;
 
 class UserController extends Controller

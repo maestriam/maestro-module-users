@@ -1,13 +1,13 @@
 <?php
 
-namespace Maestro\Users\Support\Facade;
+namespace Maestro\Users\Support;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static \Maestro\Users\Entities\UserEntity user()
- * @method static \Maestro\Users\Entities\AuthEntity auth()
- * @method static \Maestro\Users\Entities\FactoryEntity factory()
+ * @method static \Maestro\Users\Services\Foundation\UserFinder finder()
+ * @method static \Maestro\Users\Services\Foundation\UserFaker factory()
+ * @method static \Maestro\Users\Services\Foundation\UserDestroyer destroyer()
  */
 class Users extends Facade
 {

@@ -4,7 +4,7 @@ namespace Maestro\Users\Tests\Feature\Facade;
 
 use Maestro\Users\Database\Models\User;
 use Maestro\Users\Http\Requests\StoreUserRequest;
-use Maestro\Users\Support\Facade\Users;
+use Maestro\Users\Support\Users;
 use Maestro\Users\Tests\TestCase;
 
 class FactoryUserFacadeTest extends TestCase
