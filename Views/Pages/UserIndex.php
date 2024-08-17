@@ -7,7 +7,7 @@ use Livewire\Attributes\Url;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Session;
 use Maestro\Admin\Views\MaestroView;
-use Maestro\Users\Database\Models\User;
+use Maestro\Users\Entities\User;
 use Maestro\Users\Support\Users;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Maestro\Users\Support\Concerns\DeletesUsers;

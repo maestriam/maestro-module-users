@@ -2,7 +2,7 @@
 
 namespace Maestro\Users\Tests\Unit\Foundation\UserFinder;
 
-use Maestro\Users\Database\Models\User;
+use Maestro\Users\Entities\User;
 use Maestro\Users\Support\Concerns\SearchesUsers;
 use Maestro\Users\Support\Users;
 use Maestro\Users\Tests\TestCase;

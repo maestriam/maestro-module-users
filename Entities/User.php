@@ -1,6 +1,6 @@
 <?php
 
-namespace Maestro\Users\Database\Models;
+namespace Maestro\Users\Entities;
 
 use Maestro\Users\Services\Events\DeletingUser;
 use Maestro\Users\Database\Factories\UserFactory;

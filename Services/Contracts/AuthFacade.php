@@ -2,7 +2,7 @@
 
 namespace Maestro\Users\Support\Contracts;
 
-use Maestro\Users\Database\Models\User;
+use Maestro\Users\Entities\User;
 
 interface AuthFacade
 {

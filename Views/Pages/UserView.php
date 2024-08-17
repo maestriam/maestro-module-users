@@ -3,7 +3,7 @@
 namespace Maestro\Users\Views\Pages;
 
 use Maestro\Admin\Views\MaestroView;
-use Maestro\Users\Database\Models\User;
+use Maestro\Users\Entities\User;
 use Maestro\Users\Support\Users;
 
 class UserView extends MaestroView

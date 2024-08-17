@@ -3,7 +3,7 @@
 namespace Maestro\Users\Services\Foundation;
 
 use Illuminate\Database\Eloquent\Builder;
-use Maestro\Users\Database\Models\User;
+use Maestro\Users\Entities\User;
 use Illuminate\Database\Eloquent\Collection;
 use Maestro\Users\Exceptions\UserNotFoundException;
 
@@ -23,7 +23,7 @@ class UserFinder
      * Retorna um usuário pelo seu ID.
      *
      * @param int $id  
-     * @return \Maestro\Users\Database\Models\User|null
+     * @return \Maestro\Users\Entities\User|null
      */
     public function find(int $id) : ?User
     {

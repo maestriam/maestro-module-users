@@ -5,7 +5,7 @@ namespace Maestro\Users\Views\Components;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Illuminate\Contracts\View\View;
-use Maestro\Users\Database\Models\User;
+use Maestro\Users\Entities\User;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Maestro\Users\Support\Concerns\DeletesUsers;
 

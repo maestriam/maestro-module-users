@@ -2,7 +2,7 @@
 
 namespace Maestro\Users\Services\Events;
 
-use Maestro\Users\Database\Models\User;
+use Maestro\Users\Entities\User;
 use Maestro\Accounts\Support\Facades\Accounts;
 
 class DeletingUser

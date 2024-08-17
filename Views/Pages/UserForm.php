@@ -5,7 +5,7 @@ namespace Maestro\Users\Views\Pages;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Session;
 use Maestro\Admin\Views\MaestroView;
-use Maestro\Users\Database\Models\User;
+use Maestro\Users\Entities\User;
 use Maestro\Users\Support\Concerns\StoresUsers;
 use Maestro\Users\Support\Concerns\UpdatesUsers;
 use Maestro\Users\Support\Concerns\SearchesUsers;

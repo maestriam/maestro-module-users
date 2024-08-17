@@ -2,7 +2,7 @@
 namespace Maestro\Users\Database\Factories;
 
 use Illuminate\Support\Facades\Hash;
-use Maestro\Users\Database\Models\User;
+use Maestro\Users\Entities\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UserFactory extends Factory

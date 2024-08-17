@@ -4,7 +4,7 @@ namespace Maestro\Users\Tests\Feature\Components;
 
 use Livewire\Livewire;
 use Maestro\Users\Tests\TestCase;
-use Maestro\Users\Database\Models\User;
+use Maestro\Users\Entities\User;
 use Maestro\Users\Support\Users;
 use Maestro\Users\Views\Components\UserActionBox;
 

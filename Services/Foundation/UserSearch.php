@@ -2,7 +2,7 @@
 
 namespace Maestro\Users\Services\Foundation;
 
-use Maestro\Users\Database\Models\User;
+use Maestro\Users\Entities\User;
 
 class UserSearch 
 {

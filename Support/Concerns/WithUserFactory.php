@@ -2,7 +2,7 @@
 
 namespace Maestro\Users\Support\Concerns;
 
-use Maestro\Users\Database\Models\User;
+use Maestro\Users\Entities\User;
 use Maestro\Users\Services\Foundation\UserFaker;
 
 trait WithUserFactory

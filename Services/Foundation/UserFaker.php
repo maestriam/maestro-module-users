@@ -3,7 +3,7 @@
 namespace Maestro\Users\Services\Foundation;
 
 use Maestro\Admin\Support\Concerns\PopulatesModule;
-use Maestro\Users\Database\Models\User;
+use Maestro\Users\Entities\User;
 use Maestro\Users\Database\Factories\UserFactory;
 use Maestro\Users\Http\Requests\StoreUserRequest;
 use Maestro\Users\Support\Concerns\AuthUsers;
