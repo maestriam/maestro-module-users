@@ -4,6 +4,7 @@ namespace Maestro\Users\Tests;
 
 use Maestro\Users\Support\Users;
 use Maestro\Admin\Tests\TestCase as MainTestCase;
+use Maestro\Users\Entities\User;
 use Maestro\Users\Support\Concerns\WithUserFactory;
 
 class TestCase extends MainTestCase
@@ -20,6 +21,16 @@ class TestCase extends MainTestCase
     {
         $this->finish();
         parent::tearDown();
+    }
+
+    /**
+     * Retorna um usuário fictício para executar testes.  
+     *
+     * @return User
+     */
+    protected function makeUser() : User
+    {
+        return Users::factory()->model();
     }
 
     /**

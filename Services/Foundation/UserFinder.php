@@ -51,4 +51,19 @@ class UserFinder
         
         return $user;
     }
+
+    /**
+     * Verifica se o parâmetro passado se trata de um objeto
+     * do tipo User, pertencente ao Maestro. 
+     * Se sim, deve retornar true. 
+     * Caso contrário, deve retornar false.
+     * 
+     *
+     * @param mixed $param
+     * @return boolean
+     */
+    public function isUser(mixed $param) : bool
+    {
+        return ($param instanceof User) ? true : false;
+    }
 }
