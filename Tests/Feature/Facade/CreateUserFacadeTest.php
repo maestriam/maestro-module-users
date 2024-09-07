@@ -19,7 +19,7 @@ class CreateUserFacadeTest extends TestCase
 
     public function testCreateUserByArray()
     {
-        $array = Users::factory()->fromArray();
+        $array = Users::factory()->definition();
 
         $user = Users::creator()->create($array);
 
