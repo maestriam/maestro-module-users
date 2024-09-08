@@ -3,8 +3,7 @@
 namespace Maestro\Users\Tests\Unit\Foundation\UserFinder;
 
 use App\Models\User as FakeUser;
-use Maestro\Accounts\Database\Models\Account;
-use Maestro\Users\Support\Users;
+use Maestro\Accounts\Entities\Account;
 use Maestro\Users\Tests\TestCase;
 use Maestro\Users\Support\Concerns\SearchesUsers;
 

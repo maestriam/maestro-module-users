@@ -3,7 +3,7 @@
 namespace Maestro\Users\Services\Events;
 
 use Maestro\Users\Entities\User;
-use Maestro\Accounts\Support\Facades\Accounts;
+use Maestro\Accounts\Support\Accounts;
 
 class DeletingUser
 {

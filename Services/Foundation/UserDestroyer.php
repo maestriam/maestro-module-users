@@ -4,7 +4,7 @@ namespace Maestro\Users\Services\Foundation;
 
 use Exception;
 use Maestro\Users\Entities\User;
-use Maestro\Accounts\Support\Facades\Accounts;
+use Maestro\Accounts\Support\Accounts;
 use Maestro\Users\Exceptions\UserNotFoundException;
 
 class UserDestroyer 

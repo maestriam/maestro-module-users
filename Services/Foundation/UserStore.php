@@ -5,7 +5,7 @@ namespace Maestro\Users\Services\Foundation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Maestro\Users\Entities\User;
-use Maestro\Accounts\Support\Facades\Accounts;
+use Maestro\Accounts\Support\Accounts;
 use Maestro\Users\Http\Requests\StoreUserRequest;
 use Maestro\Admin\Support\Concerns\HandlesRequests;
 

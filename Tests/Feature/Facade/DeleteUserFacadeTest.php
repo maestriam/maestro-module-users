@@ -2,7 +2,7 @@
 
 namespace Maestro\Users\Tests\Feature\Facade;
 
-use Maestro\Accounts\Support\Facades\Accounts;
+use Maestro\Accounts\Support\Accounts;
 use Maestro\Users\Tests\TestCase;
 use Maestro\Users\Support\Users;
 
