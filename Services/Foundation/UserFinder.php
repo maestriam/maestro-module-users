@@ -54,7 +54,7 @@ class UserFinder
 
     /**
      * Verifica se o parâmetro passado se trata de um objeto
-     * do tipo User, pertencente ao Maestro. 
+     * do tipo User, pertencente ao Maestro/User. 
      * Se sim, deve retornar true. 
      * Caso contrário, deve retornar false.
      * 

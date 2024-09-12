@@ -73,7 +73,7 @@ class UserStore
     {
         $name = $request->accountName;
 
-        Accounts::account()->create($user, $name);
+        Accounts::account()->creator()->create($user, $name);
     }
     
     /**

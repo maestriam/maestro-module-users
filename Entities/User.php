@@ -6,15 +6,13 @@ use Illuminate\Contracts\Support\Jsonable;
 use Maestro\Users\Services\Events\DeletingUser;
 use Maestro\Users\Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Maestro\Accounts\Support\Concerns\HasAccount;
 use Maestro\Admin\Support\Concerns\CamelAttributes;
 use Maestro\Admin\Support\Concerns\HasSearch;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Maestro\Accounts\Support\Contracts\HasName;
+use Maestro\Accounts\Support\Abstraction\Accountable;
 
-class User extends Authenticatable implements HasName
+class User extends Accountable
 {
-    use CamelAttributes, HasFactory, HasAccount, HasSearch;
+    use CamelAttributes, HasFactory,  HasSearch;
     
     protected $dispatchesEvents = [
         'deleting' => DeletingUser::class
@@ -23,6 +21,11 @@ class User extends Authenticatable implements HasName
     protected $searchable = [
         'email', 'first_name:last_name', 
     ];
+
+    public function token(): string
+    {
+        return '88j4j8945jm9ggnm58vkd3ggfgg';
+    }
         
     protected static function newFactory()
     {
