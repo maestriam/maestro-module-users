@@ -35,7 +35,7 @@ class UserStore
     {   
         $this->guard($input);
         
-        $data = $this->getInputData($input);
+        $data = $this->toInput($input);
         
         return $this->store($data);            
     }

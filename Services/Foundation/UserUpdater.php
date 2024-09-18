@@ -31,7 +31,7 @@ class UserUpdater
         $this->guard($request);
 
         $user = $this->finder()->findOrFail($id); 
-        $data = $this->getInputData($request);
+        $data = $this->toInput($request);
 
         $this->store($user, $data);
 
