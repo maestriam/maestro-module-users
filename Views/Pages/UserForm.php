@@ -99,7 +99,7 @@ class UserForm extends MaestroView
         if ($id == null) return $this;
 
         if ((int) $id == 0) {
-            return $this->goToPageNotFound();
+            return $this->pageNotFound();
         }
         
         return $this->setUser($id)->edit();
@@ -135,7 +135,7 @@ class UserForm extends MaestroView
             return $this->load($this->user);
 
         } catch (UserNotFoundException $e) {
-            return $this->goToPageNotFound();
+            return $this->pageNotFound();
         }
     }
 
