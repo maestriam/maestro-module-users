@@ -6,8 +6,19 @@ use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
+    /**
+     * Nome da tabela de usuários que será criada pelo módulo
+     *
+     * @var string
+     */
+    private string $table = 'users';
 
-    private string $tableName = 'users';
+    /**
+     * Nome da tabela padrão que vem junto com projetos Laravel. 
+     *
+     * @var string
+     */
+    private string $legacy = 'users_legacy';
 
     /**
      * Run the migrations.
@@ -16,35 +27,12 @@ return new class extends Migration
      */
     public function up()
     {
-        if (Schema::hasTable($this->tableName)) {
-            $this->renameLegacyTable();
+        if (Schema::hasTable($this->table)) {
+            Schema::rename($this->table, $this->legacy);
         }
         
-        return $this->createTable();
-    }
-
-    private function renameLegacyTable()
-    {
-        $new = $this->tableName . "_legacy";
-
-        Schema::rename($this->tableName, $new);
-    }
-
-    private function createTable()
-    {
-        Schema::create($this->tableName, function (Blueprint $table) {
+        Schema::create($this->table, function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('email');
-            $table->string('password');
-            $table->timestamps();
-        });
-    }
-
-    private function updateTable()
-    {
-        Schema::table($this->tableName, function (Blueprint $table) {
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email');
@@ -60,6 +48,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists($this->tableName);
+        Schema::dropIfExists($this->table);
+        Schema::rename($this->legacy, $this->table);
     }
 };
