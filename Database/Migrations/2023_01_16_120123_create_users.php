@@ -49,6 +49,9 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists($this->table);
-        Schema::rename($this->legacy, $this->table);
+        
+        if (Schema::hasTable($this->legacy)) {
+            Schema::rename($this->legacy, $this->table);
+        }
     }
 };
