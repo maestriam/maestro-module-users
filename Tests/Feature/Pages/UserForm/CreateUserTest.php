@@ -66,6 +66,26 @@ class CreateUserTest extends TestCase
              ->assertSee(__('users::validations.password.confirmed'));
     }
 
+    
+    /**
+     * Deve receber um erro ao tentar criar um usuário com outro 
+     * e-mail já cadastrado.  
+     *
+     * @return void
+     */
+    public function testDuplicateEmail()
+    {
+        $user = Users::factory()->fromRequest();
+
+        $existent = $this->makeUser();
+        
+        $user->email = $existent->email;
+        
+        $error = __('users::validations.email.unique');
+
+        $this->save($user)->assertHasErrors(['email' => $error]);    
+    }
+
     /**
      * Deve renderizar o componente corretamente, juntamente com 
      * todos os labels. 

@@ -13,7 +13,8 @@ return [
     ],
     'email' => [
         'email'    => 'E-mail informado possui um formato inválido',
-        'required' => 'O campo "e-mail" é obrigatório.'
+        'required' => 'O campo "e-mail" é obrigatório.',
+        'unique'   => 'Este e-mail já foi cadastrado anteriormente.',
     ],
     'password' => [
         'required'  => 'O campo "senha" é obrigatório.',

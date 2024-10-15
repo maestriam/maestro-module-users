@@ -3,12 +3,15 @@
 namespace Maestro\Users\Tests\Feature\Pages\UserForm;
 
 use Livewire\Livewire;
+use Maestro\Users\Support\Concerns\SearchesUsers;
 use Maestro\Users\Tests\TestCase;
 use Maestro\Users\Support\Users;
 use Maestro\Users\Views\Pages\UserForm;
 
 class UserEditingTest extends TestCase
 {
+    use SearchesUsers;
+
     /**
      * Deve renderizar o formulário de edição corretamente.
      *
@@ -106,8 +109,7 @@ class UserEditingTest extends TestCase
     public function testEditUser()
     {
         $original = $this->initSession();
-
-        $request = Users::factory()->fromRequest();
+        $request  = Users::factory()->fromRequest();
 
         Livewire::test(UserForm::class, ['id' => $original->id])
             ->set('firstName', $request->firstName)
@@ -131,6 +133,25 @@ class UserEditingTest extends TestCase
         Livewire::test(UserForm::class, ['id' => $original->id])
             ->call('save')
             ->assertHasNoErrors();
+    }
+
+    /**
+     * Deve receber um erro ao tentar editar um usuário com outro 
+     * e-mail já cadastrado que não pertence a ele.  
+     *
+     * @return void
+     */
+    public function testFormWithDuplicateEmail()
+    {
+        $original = $this->initSession();
+        $existent = $this->makeUser();
+        
+        $error = __('users::validations.email.unique');
+
+        Livewire::test(UserForm::class, ['id' => $original->id])
+            ->set('email', $existent->email)
+            ->call('save')
+            ->assertHasErrors(['email' => $error]);
     }
 
     /**

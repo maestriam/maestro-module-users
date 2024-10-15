@@ -1,18 +1,18 @@
 <?php
 namespace Maestro\Users\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Maestro\Users\Http\Rules\UniqueEmail;
 
 class StoreUserRequest extends UserRequest
 {   
     public function rules() : array
     {
         return [
-            'firstName'   => 'required|string',
-            'lastName'    => 'required|string',
-            'accountName' => 'required|accounts.unique',
-            'email'       => 'required|email',
-            'password'    => 'required|confirmed',
+            'firstName'   => ['required', 'string'],
+            'lastName'    => ['required', 'string'],
+            'password'    => ['required', 'confirmed'],
+            'accountName' => ['required', 'accounts.unique'],
+            'email'       => ['required', 'email', new UniqueEmail],
         ];
     }
 }

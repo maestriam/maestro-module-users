@@ -3,11 +3,13 @@
 namespace Maestro\Users\Services\Providers;
 
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Maestro\Users\Console\SetupCommand;
 use Maestro\Users\Console\PopulateCommand;
 use Maestro\Users\Http\Middleware\AuthenticatesUsers;
 use Maestriam\Maestro\Foundation\Registers\FileRegister;
+use Maestro\Users\Http\Rules\UniqueEmail;
 use Maestro\Users\Support\Facades\UserFacade;
 
 class MainServiceProvider extends ServiceProvider
@@ -37,6 +39,7 @@ class MainServiceProvider extends ServiceProvider
         $this->registerMiddlewares();
         $this->registerMigrations();
         $this->registerCommands();
+        $this->registerRules();
     }
 
     /**
@@ -59,6 +62,11 @@ class MainServiceProvider extends ServiceProvider
         foreach ($middlewares as $key => $class) {
             $this->app->make('router')->aliasMiddleware($key, $class);
         }
+    }
+
+    private function registerRules()
+    {        
+        Validator::extend('users.email.unique', UniqueEmail::class);
     }
 
     /**

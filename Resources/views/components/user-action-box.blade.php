@@ -7,5 +7,4 @@
     <div class="bullet"></div>
     
     <a href="#" wire:click="showDeleteModal()" class="text-danger">{{ __('users::buttons.delete') }}</a>
-
 </div>

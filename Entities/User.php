@@ -13,6 +13,8 @@ use Maestro\Accounts\Support\Abstraction\Accountable;
 class User extends Accountable
 {
     use CamelAttributes, HasFactory,  HasSearch;
+
+    const TOKEN = '88j4j8945jm9ggnm58vkd3ggfgg';
     
     protected $dispatchesEvents = [
         'deleting' => DeletingUser::class
@@ -24,7 +26,7 @@ class User extends Accountable
 
     public function token(): string
     {
-        return '88j4j8945jm9ggnm58vkd3ggfgg';
+        return self::TOKEN;
     }
         
     protected static function newFactory()

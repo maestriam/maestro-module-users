@@ -4,6 +4,7 @@ namespace Maestro\Users\Services\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
+use Maestro\Users\Views\Components\EmailText;
 use Maestro\Users\Views\Components\UserActionBox;
 use Maestro\Users\Views\Components\UserSelect;
 use Maestro\Users\Views\Pages\UserForm;

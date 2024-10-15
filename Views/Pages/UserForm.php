@@ -2,10 +2,9 @@
 
 namespace Maestro\Users\Views\Pages;
 
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Session;
-use Maestro\Admin\Views\MaestroView;
 use Maestro\Users\Entities\User;
+use Maestro\Admin\Views\MaestroView;
+use Illuminate\Support\Facades\Session;
 use Maestro\Users\Support\Concerns\StoresUsers;
 use Maestro\Users\Support\Concerns\UpdatesUsers;
 use Maestro\Users\Support\Concerns\SearchesUsers;
@@ -178,7 +177,8 @@ class UserForm extends MaestroView
     {        
         $request = $this->getRequest();
 
-        if ($this->isEdition()) {
+        
+        if ($this->isEdition() == true) {
             return $this->update($request);
         }
 
