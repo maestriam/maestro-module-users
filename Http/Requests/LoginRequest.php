@@ -11,7 +11,7 @@ class LoginRequest extends FormRequest
      * 
      * @var string
      */
-    private string $source = 'users::validation';
+    private string $source = 'users::validations';
 
     /**
      * Determine if the user is authorized to make this request.

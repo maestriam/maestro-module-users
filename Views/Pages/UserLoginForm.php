@@ -86,11 +86,7 @@ class UserLoginForm extends MaestroView
     {
         $this->guard();
 
-        if ($this->login()) {
-            return $this->success();
-        }
-
-        return $this->failed();
+        return $this->login() ? $this->success() : $this->failed();
     }
     
     /**
