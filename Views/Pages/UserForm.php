@@ -198,9 +198,13 @@ class UserForm extends MaestroView
 
         $this->guard($request);
 
-        $this->updater()->update($this->userId, $request);
+        $user = $this->updater()->update($this->userId, $request);
 
-        Session::flash('message', 'Post successfully updated.');
+        $label = __('users::messages.updated');
+
+        $message = sprintf($label, $user->account()->name);
+
+        Session::flash('message', $message);
     }
 
     /**
@@ -213,9 +217,13 @@ class UserForm extends MaestroView
     {        
         $this->guard($request);
 
-        $this->creator()->create($request);
+        $user = $this->creator()->create($request);
 
-        Session::flash('message', 'Post successfully created.');
+        $label = __('users::messages.created');
+
+        $message = sprintf($label, $user->account()->name);
+
+        Session::flash('message', $message);
     }
 
     /**

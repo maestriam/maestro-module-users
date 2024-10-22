@@ -111,12 +111,16 @@ class UserEditingTest extends TestCase
         $original = $this->initSession();
         $request  = Users::factory()->fromRequest();
 
+        $label = __('users::messages.updated');
+        $message = sprintf($label, $request->accountName);
+        
         Livewire::test(UserForm::class, ['id' => $original->id])
             ->set('firstName', $request->firstName)
             ->set('lastName', $request->lastName)
             ->set('email', $request->email)
             ->set('account', $request->accountName)
             ->call('save')
+            ->assertSee($message)
             ->assertHasNoErrors();
     }
 

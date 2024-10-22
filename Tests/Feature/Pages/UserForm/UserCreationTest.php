@@ -10,7 +10,7 @@ use Livewire\Features\SupportTesting\Testable;
 use Maestro\Users\Http\Requests\StoreUserRequest;
 use Maestro\Accounts\Views\Components\AccountForm;
 
-class CreateUserTest extends TestCase
+class UserCreationTest extends TestCase
 {
     /**
      * Deve exibir o formulário de criação ao tentar acessar a rota
@@ -36,7 +36,11 @@ class CreateUserTest extends TestCase
     public function testCreateUser()
     {
         $user = Users::factory()->fromRequest();
-        $this->save($user);
+
+        $label = __('users::messages.created');
+        $message = sprintf($label, $user->accountName);
+
+        $this->save($user)->assertSee($message);
        
         $collection = Users::finder()->all();        
         $first = $collection->first();     

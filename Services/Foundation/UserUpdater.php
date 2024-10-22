@@ -2,11 +2,11 @@
 
 namespace Maestro\Users\Services\Foundation;
 
-use Maestro\Admin\Support\Concerns\HandlesRequests;
+use Maestro\Accounts\Support\Accounts;
 use Maestro\Users\Entities\User;
 use Maestro\Users\Support\Concerns\SearchesUsers;
 use Maestro\Users\Http\Requests\UpdateUserRequest;
-use Maestro\Users\Support\Concerns\StorageFunctions;
+use Maestro\Admin\Support\Concerns\HandlesRequests;
 
 class UserUpdater 
 {
@@ -39,6 +39,21 @@ class UserUpdater
     }
 
     /**
+     * Atualiza uma conta do usuário
+     *
+     * @param User $user
+     * @return void
+     */
+    private function updateAccount(User $user, object $request) : void
+    {
+        $name = $request->accountName;
+
+        if ($user->account()->name == $name) return;
+
+        Accounts::account()->creator()->update($user, $name);
+    }
+
+    /**
      * Undocumented function
      *
      * @param User $user
@@ -52,6 +67,8 @@ class UserUpdater
         $user->last_name  = $data->lastName ?? $user->lastName;
 
         $user->save();
+
+        $this->updateAccount($user, $data);
 
         return $user;
     }
