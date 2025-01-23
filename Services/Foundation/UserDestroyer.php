@@ -2,13 +2,16 @@
 
 namespace Maestro\Users\Services\Foundation;
 
-use Exception;
 use Maestro\Users\Entities\User;
 use Maestro\Accounts\Support\Accounts;
-use Maestro\Users\Exceptions\UserNotFoundException;
+use Maestro\Admin\Support\Concerns\Locomotive;
+use Maestro\Users\Services\Events\UserDeleted;
+use Maestro\Users\Support\Concerns\SearchesUsers;
 
 class UserDestroyer 
 {
+    use Locomotive, SearchesUsers;
+
     /**
      * Exclui um usuário da base de dados, de acordo com seu ID.  
      *
@@ -17,39 +20,48 @@ class UserDestroyer
      */
     public function delete(int|User $target) : int
     {
-        $user = $this->getUserOrFail($target);        
+        $id = is_int($target) ? $target : $target->id;
 
+        $user = $this->finder()->findOrFail($id); 
+
+        $this->dispatchEvent($user);
         $this->deleteAccount($user);
-        
-        $user->forceDelete();
+
+        $user->delete();
 
         return $user->id;
     }
-
-    private function getUserOrFail(int|User $target) : User
-    {
-        if (isset($target->id)) {
-            return $target;
-        }
-
-        $user = User::find($target);
-
-        if (! $user) {
-            throw new UserNotFoundException($target);
-        }
-
-        return $user;
+    
+    /**
+     * Dispara um evento sinalizando para todo o sistema que um
+     * usuário será excluído.  
+     * Com isso, os outros módulos devem
+     * executar suas respectivas tarefas para eliminar quaisquer 
+     * dados referente ao usuário específicado.  
+     *
+     * @param User $user
+     * @return void
+     */
+    private function dispatchEvent(User $user)
+    {            
+        $this->event(UserDeleted::class, 'maestro.jobs.users.purged');
+    
+        UserDeleted::dispatch($user);                   
     }
 
+    /**
+     * Remove os dados da conta do usuário. 
+     *
+     * @param User $user
+     * @return boolean
+     */
     private function deleteAccount(User $user) : bool
     {
-        if (! $user->account()) {
-            return true;
-        }
+        if (! $user->account()) return true;
 
-        $accId = $user->account()->id;
+        $accountId = $user->account()->id;
 
-        return Accounts::account()->delete($accId);
+        return Accounts::account()->delete($accountId);
     }
 
     /**

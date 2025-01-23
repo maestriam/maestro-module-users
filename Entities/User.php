@@ -2,23 +2,17 @@
 
 namespace Maestro\Users\Entities;
 
-use Illuminate\Contracts\Support\Jsonable;
-use Maestro\Users\Services\Events\DeletingUser;
-use Maestro\Users\Database\Factories\UserFactory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Maestro\Admin\Support\Concerns\CamelAttributes;
 use Maestro\Admin\Support\Concerns\HasSearch;
+use Maestro\Users\Database\Factories\UserFactory;
+use Maestro\Admin\Support\Concerns\CamelAttributes;
 use Maestro\Accounts\Support\Abstraction\Accountable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class User extends Accountable
 {
     use CamelAttributes, HasFactory,  HasSearch;
 
     const TOKEN = '88j4j8945jm9ggnm58vkd3ggfgg';
-    
-    protected $dispatchesEvents = [
-        'deleting' => DeletingUser::class
-    ];
 
     protected $searchable = [
         'email', 'first_name:last_name', 
