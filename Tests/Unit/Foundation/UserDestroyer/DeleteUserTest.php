@@ -2,10 +2,9 @@
 
 namespace Maestro\Users\Tests\Unit\Foundation\UserDestroyer;
 
-use Maestro\Users\Tests\TestCase;
-use Maestro\Users\Support\Concerns\AuthUsers;
-use Maestro\Users\Support\Concerns\DeletesUsers;
 use Maestro\Users\Support\Users;
+use Maestro\Users\Tests\TestCase;
+use Maestro\Users\Support\Concerns\DeletesUsers;
 
 class DeleteUserTest extends TestCase
 {

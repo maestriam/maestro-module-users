@@ -2,19 +2,22 @@
 
 namespace Maestro\Users\Tests;
 
+use Maestro\Admin\Support\Concerns\Locomotive;
 use Maestro\Users\Support\Users;
 use Maestro\Admin\Tests\TestCase as MainTestCase;
 use Maestro\Users\Entities\User;
 use Maestro\Users\Support\Concerns\WithUserFactory;
+use Maestro\Users\Support\Enums\EventsEnum;
 
 class TestCase extends MainTestCase
 {
-    use WithUserFactory;
+    use WithUserFactory, Locomotive;
 
     public function setUp() : void
     {
         parent::setUp();
         $this->start();
+        $this->clear(EventsEnum::USER_REMOVING->value);
     } 
 
     public function tearDown() : void

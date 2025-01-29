@@ -5,8 +5,9 @@ namespace Maestro\Users\Services\Foundation;
 use Maestro\Users\Entities\User;
 use Maestro\Accounts\Support\Accounts;
 use Maestro\Admin\Support\Concerns\Locomotive;
-use Maestro\Users\Services\Events\UserDeleted;
 use Maestro\Users\Support\Concerns\SearchesUsers;
+use Maestro\Users\Support\Enums\Events;
+use Maestro\Users\Support\Enums\EventsEnum;
 
 class UserDestroyer 
 {
@@ -24,8 +25,7 @@ class UserDestroyer
 
         $user = $this->finder()->findOrFail($id); 
 
-        $this->dispatchEvent($user);
-        $this->deleteAccount($user);
+        $this->dispatchEvent($user)->deleteAccount($user);
 
         $user->delete();
 
@@ -40,13 +40,13 @@ class UserDestroyer
      * dados referente ao usuário específicado.  
      *
      * @param User $user
-     * @return void
+     * @return self
      */
-    private function dispatchEvent(User $user)
+    private function dispatchEvent(User $user) : self
     {            
-        $this->event(UserDeleted::class, 'maestro.jobs.users.purged');
-    
-        UserDeleted::dispatch($user);                   
+        $this->event(EventsEnum::USER_REMOVING->value, $user);
+
+        return $this;
     }
 
     /**
