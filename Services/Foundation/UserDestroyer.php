@@ -6,8 +6,6 @@ use Maestro\Users\Entities\User;
 use Maestro\Accounts\Support\Accounts;
 use Maestro\Admin\Support\Concerns\Locomotive;
 use Maestro\Users\Support\Concerns\SearchesUsers;
-use Maestro\Users\Support\Enums\Events;
-use Maestro\Users\Support\Enums\EventsEnum;
 
 class UserDestroyer 
 {
@@ -24,29 +22,12 @@ class UserDestroyer
         $id = is_int($target) ? $target : $target->id;
 
         $user = $this->finder()->findOrFail($id); 
-
-        $this->dispatchEvent($user)->deleteAccount($user);
-
+        
         $user->delete();
 
-        return $user->id;
-    }
-    
-    /**
-     * Dispara um evento sinalizando para todo o sistema que um
-     * usuário será excluído.  
-     * Com isso, os outros módulos devem
-     * executar suas respectivas tarefas para eliminar quaisquer 
-     * dados referente ao usuário específicado.  
-     *
-     * @param User $user
-     * @return self
-     */
-    private function dispatchEvent(User $user) : self
-    {            
-        $this->event(EventsEnum::USER_REMOVING->value, $user);
+        $this->deleteAccount($user);
 
-        return $this;
+        return $user->id;
     }
 
     /**
