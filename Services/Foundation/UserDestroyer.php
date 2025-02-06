@@ -4,12 +4,11 @@ namespace Maestro\Users\Services\Foundation;
 
 use Maestro\Users\Entities\User;
 use Maestro\Accounts\Support\Accounts;
-use Maestro\Admin\Support\Concerns\Locomotive;
 use Maestro\Users\Support\Concerns\SearchesUsers;
 
 class UserDestroyer 
 {
-    use Locomotive, SearchesUsers;
+    use SearchesUsers;
 
     /**
      * Exclui um usuário da base de dados, de acordo com seu ID.  
@@ -22,7 +21,7 @@ class UserDestroyer
         $id = is_int($target) ? $target : $target->id;
 
         $user = $this->finder()->findOrFail($id); 
-        
+
         $user->delete();
 
         $this->deleteAccount($user);

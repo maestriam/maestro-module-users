@@ -15,5 +15,7 @@ class UserDeleting
      */
     public function __construct(
         public User $user,
-    ) { }
+    ) { 
+        // dd($user);
+    }
 }

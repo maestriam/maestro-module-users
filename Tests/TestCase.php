@@ -2,9 +2,11 @@
 
 namespace Maestro\Users\Tests;
 
+use Illuminate\Support\Facades\Event;
 use Maestro\Users\Support\Users;
 use Maestro\Users\Entities\User;
 use Maestro\Admin\Tests\TestCase as MainTestCase;
+use Maestro\Users\Services\Events\UserDeleting;
 use Maestro\Users\Support\Concerns\WithUserFactory;
 
 class TestCase extends MainTestCase
@@ -15,7 +17,7 @@ class TestCase extends MainTestCase
     {
         parent::setUp();
         $this->start();
-        User::unsetEventDispatcher();
+        Event::fake([ UserDeleting::class ]);
     } 
 
     public function tearDown() : void
