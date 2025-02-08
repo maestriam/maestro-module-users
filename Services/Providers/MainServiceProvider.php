@@ -2,19 +2,15 @@
 
 namespace Maestro\Users\Services\Providers;
 
-use Illuminate\Support\Facades\Bus;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Maestro\Users\Console\SetupCommand;
+use Maestro\Users\Http\Rules\UniqueEmail;
 use Maestro\Users\Console\PopulateCommand;
+use Maestro\Users\Support\Facades\UserFacade;
 use Maestro\Users\Http\Middleware\AuthenticatesUsers;
 use Maestriam\Maestro\Foundation\Registers\FileRegister;
-use Maestro\Users\Http\Rules\UniqueEmail;
-use Maestro\Users\Services\Events\UserPurged;
-use Maestro\Users\Support\Facades\UserFacade;
 
 class MainServiceProvider extends ServiceProvider
 {
