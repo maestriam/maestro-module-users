@@ -90,10 +90,11 @@ class UserForm extends MaestroView
     /**
      * Evento executado ao iniciar os atributos.
      * 
-     * @todo Deve ser alterado futuramente para permitir string (pesquisa por account)
+     * @todo Deve ser alterado futuramente para 
+     * permitir string (pesquisa por account)
      * @return self
      */
-    public function mount(int|string $id = null) : mixed
+    public function mount(null|int|string $id = null) : mixed
     {  
         if ($id == null) return $this;
 
@@ -176,7 +177,6 @@ class UserForm extends MaestroView
     public function save() 
     {        
         $request = $this->getRequest();
-
         
         if ($this->isEdition() == true) {
             return $this->update($request);
@@ -269,7 +269,7 @@ class UserForm extends MaestroView
      * @param integer $id
      * @return self
      */
-    private function setUser(int $id = null) : self
+    private function setUser(?int $id = null) : self
     {
         $this->userId = $id;
         
