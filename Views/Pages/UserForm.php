@@ -5,7 +5,7 @@ namespace Maestro\Users\Views\Pages;
 use Maestro\Users\Entities\User;
 use Maestro\Admin\Views\MaestroView;
 use Illuminate\Support\Facades\Session;
-use Maestro\Users\Support\Concerns\StoresUsers;
+use Maestro\Users\Support\Concerns\CreatesUsers;
 use Maestro\Users\Support\Concerns\UpdatesUsers;
 use Maestro\Users\Support\Concerns\SearchesUsers;
 use Livewire\Features\SupportRedirects\Redirector;
@@ -15,7 +15,7 @@ use Maestro\Admin\Support\Concerns\PageRedirections;
 
 class UserForm extends MaestroView
 {
-    use StoresUsers,
+    use CreatesUsers,
         SendsAccountErrors, 
         PageRedirections,
         UpdatesUsers,

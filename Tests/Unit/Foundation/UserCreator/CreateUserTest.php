@@ -1,14 +1,14 @@
 <?php
 
-namespace Maestro\Users\Tests\Unit\Foundation\UserStore;
+namespace Maestro\Users\Tests\Unit\Foundation\UserCreator;
 
 use Maestro\Users\Tests\TestCase;
-use Maestro\Users\Support\Concerns\StoresUsers;
+use Maestro\Users\Support\Concerns\CreatesUsers;
 use Maestro\Users\Support\Users;
 
 class CreateUserTest extends TestCase
 {
-    use StoresUsers;
+    use CreatesUsers;
 
     /**
      * Deve criar um novo usuário ao passar um objeto do 

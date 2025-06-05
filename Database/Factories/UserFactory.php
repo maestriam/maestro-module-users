@@ -2,7 +2,7 @@
 namespace Maestro\Users\Database\Factories;
 
 use Maestro\Users\Entities\User;
-use Maestro\Users\Support\Concerns\StoresUsers;
+use Maestro\Users\Support\Concerns\CreatesUsers;
 use Maestro\Users\Http\Requests\StoreUserRequest;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Maestro\Admin\Support\Concerns\PopulatesModule;
@@ -10,7 +10,7 @@ use Maestro\Users\Support\Concerns\AuthUsers;
 
 class UserFactory extends Factory
 {
-    use StoresUsers, AuthUsers, PopulatesModule;
+    use CreatesUsers, AuthUsers, PopulatesModule;
 
     /**
      * The name of the factory's corresponding model.

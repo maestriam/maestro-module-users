@@ -2,22 +2,22 @@
 
 namespace Maestro\Users\Support\Concerns;
 
-use Maestro\Users\Services\Foundation\UserStore;
+use Maestro\Users\Services\Foundation\UserCreator;
 
 /**
  * Fornece funcionalidades para inserir/atualizar os 
  * dados do usuário.  
  */
-trait StoresUsers
+trait CreatesUsers
 {
     /**
      * Retorna o serviço com as RN's sobre criação e 
      * edição dos dados do usuário.  
      * 
-     * @return UserStore
+     * @return UserCreator
      */
-    public function creator() : UserStore
+    public function creator() : UserCreator
     {
-        return app()->make(UserStore::class);
+        return app()->make(UserCreator::class);
     }
 }

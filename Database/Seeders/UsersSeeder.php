@@ -3,11 +3,11 @@
 namespace Maestro\Users\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Maestro\Users\Support\Concerns\StoresUsers;
+use Maestro\Users\Support\Concerns\CreatesUsers;
 
 class UsersSeeder extends Seeder
 {
-    use StoresUsers;
+    use CreatesUsers;
 
     /**
      * Run the database seeds.

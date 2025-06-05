@@ -9,7 +9,7 @@ use Maestro\Accounts\Support\Accounts;
 use Maestro\Users\Http\Requests\StoreUserRequest;
 use Maestro\Admin\Support\Concerns\HandlesRequests;
 
-class UserStore 
+class UserCreator 
 {
     use HandlesRequests;
 

@@ -14,7 +14,7 @@ trait UpdatesUsers
      * Retorna o serviço com as RN's sobre 
      * edição dos dados do usuário.  
      * 
-     * @return UserStore
+     * @return UserCreator
      */
     public function updater() : UserUpdater
     {
