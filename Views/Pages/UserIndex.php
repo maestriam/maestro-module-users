@@ -8,17 +8,14 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Session;
 use Maestro\Admin\Views\MaestroView;
 use Maestro\Users\Entities\User;
-use Maestro\Users\Support\Users;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Maestro\Users\Support\Concerns\DeletesUsers;
 use Maestro\Users\Support\Concerns\SearchesUsers;
 use Maestro\Admin\Support\Concerns\WithPaginationComponent;
+use Maestro\Users\Support\Enums\LivewireEnum;
 
 class UserIndex extends MaestroView
 {
     use SearchesUsers,
-        DeletesUsers,        
-        LivewireAlert,
         WithPaginationComponent;    
 
     /**
@@ -56,7 +53,7 @@ class UserIndex extends MaestroView
      * 
      * @return View
      */
-    #[On('user-deleted')]
+    #[On(LivewireEnum::ACTION_MENU_ON_DELETED->value)]
     public function render() : View
     {
         $users = $this->searchUser();
@@ -64,46 +61,6 @@ class UserIndex extends MaestroView
         $collection = ['users' => $users];
 
         return $this->renderView($this->view, $collection);
-    }
-
-    /**
-     * Resgata os dados do usuário para realizar operações de exclusão
-     *
-     * @param User $user
-     * @return User
-     */
-    private function selectUser(string $id) : User
-    {
-        $selected = $this->finder()->find($id);
-        
-        Session::put('selected-user', $selected);
-
-        return $selected;
-    }
-
-    /**
-     * Dispara um evento para a exclusão de um usuário na plataforma
-     *
-     * @param string $id
-     * @return void
-     */
-    public function remove(string $id)
-    {
-        $user = $this->selectUser($id);
-        $text = $this->getDeleteMessage($user);
-    
-        $this->alert('warning', __('users::modals.delete.title'), [            
-            'timer'             => null,
-            'toast'             => false,
-            'reverseButtons'    => true,
-            'showDenyButton'    => true,
-            'showConfirmButton' => true,
-            'html'              => $text,
-            'position'          => 'center',
-            'onConfirmed'       => 'deleteUser',
-            'denyButtonText'    => __('users::modals.delete.deny'),
-            'confirmButtonText' => __('users::modals.delete.confirm'),            
-        ]);
     }
 
     /**
@@ -118,23 +75,5 @@ class UserIndex extends MaestroView
         }
 
         return $this->finder()->search($this->search)->paginate(10);
-    }
-
-    /**
-     * Exclui um usuário da base de dados de forma permanente. 
-     * 
-     * @return void
-     */
-    public function deleteUser()
-    {
-        $user = $this->getSelected();
-
-        $this->destroyer()->delete($user->id);
-
-        return $this->alert("success", __('users::modals.deleted.title'), [
-            "text"             => __('users::modals.deleted.text'),
-            'position'         => 'bottom-end',
-            'timerProgressBar' => true,
-        ]);
-    }    
+    }  
 }

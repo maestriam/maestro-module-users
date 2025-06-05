@@ -3,14 +3,15 @@
 namespace Maestro\Users\Services\Providers;
 
 use Livewire\Livewire;
-use Maestro\Users\Views\Pages\UserForm;
 use Illuminate\Support\ServiceProvider;
+use Maestro\Users\Views\Pages\UserForm;
 use Maestro\Users\Views\Pages\UserView;
 use Maestro\Users\Views\Pages\UserIndex;
 use Maestro\Users\Views\Pages\UserLoginForm;
 use Maestro\Users\Views\Components\UserSelect;
+use Maestro\Users\Views\Components\ActionMenu;
+use Maestro\Users\Support\Enums\ComponentEnum;
 use Maestro\Users\Support\Concerns\HasModuleName;
-use Maestro\Users\Views\Components\UserActionBox;
 use Maestro\Admin\Support\Concerns\RegistersViews;
 
 class ViewServiceProvider extends ServiceProvider
@@ -18,6 +19,9 @@ class ViewServiceProvider extends ServiceProvider
     use HasModuleName, 
         RegistersViews;
 
+    /**
+     * {@inheritDoc}
+     */
     public function boot()
     {
         $this->init();
@@ -25,12 +29,18 @@ class ViewServiceProvider extends ServiceProvider
         $this->registerComponents();
     }    
 
+    /**
+     * {@inheritDoc}
+     */
     protected function registerComponents() : void
     {        
-        Livewire::component('user-select', UserSelect::class);
-        Livewire::component('user-action-box', UserActionBox::class);
+        Livewire::component(ComponentEnum::USER_SELECT->value, UserSelect::class);
+        Livewire::component(ComponentEnum::ACTION_MENU->value, ActionMenu::class);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     private function registerPages()
     {
         Livewire::component('users.pages.view', UserView::class);

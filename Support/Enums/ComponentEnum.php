@@ -4,5 +4,6 @@ namespace Maestro\Users\Support\Enums;
 
 enum ComponentEnum : string
 {
-    case ACTION_MENU = '';
+    case USER_SELECT = 'users.user-select';
+    case ACTION_MENU = 'users.action-menu';
 }

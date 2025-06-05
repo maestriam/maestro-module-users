@@ -34,18 +34,13 @@
                     </x-tr>
                 @else
 
-                    @foreach($users as $user)
-                    
-                        @if (! isset($user->id) || ! $user->account())
-                        @continue
-                        @endif
-                    
+                    @foreach($users as $user)                    
                         <x-tr>
                             <x-td width="10"><x-avatar :width="40"/></x-td>
 
                             <x-td>                                                       
                                 {{ $user->firstName . ' ' . $user->lastName }}                                
-                                <livewire:user-action-box :user="$user" wire:key="{{ Str::uuid() }}" />
+                                <livewire:users.action-menu :user="$user" wire:key="{{ Str::uuid() }}" />
                             </x-td>
                             
                             <x-td>{{ $user->email }}</x-td>                            
