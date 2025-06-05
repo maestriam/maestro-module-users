@@ -9,7 +9,7 @@ use Maestro\Users\Support\Concerns\StoresUsers;
 use Maestro\Users\Support\Concerns\UpdatesUsers;
 use Maestro\Users\Support\Concerns\WithUserFactory;
 
-class UserFacade
+class ModuleFacade
 {
     use SearchesUsers,
         DeletesUsers,

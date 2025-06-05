@@ -37,7 +37,7 @@ Route::prefix('users')->group(function () {
         ->middleware(['users.auth'])
         ->name('maestro.users.edit');
 
-    Route::get('/{id}/view', UserView::class)
+    Route::get('/{id}/info', UserView::class)
         ->middleware(['users.auth'])
         ->name('maestro.users.view');
 });

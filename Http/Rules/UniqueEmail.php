@@ -18,6 +18,12 @@ class UniqueEmail implements ValidationRule, DataAwareRule
      */
     protected $data = [];
 
+    /**
+     * Define os dados que são passados na requisição. 
+     *
+     * @param array $data
+     * @return static
+     */
     public function setData(array $data) : static
     {
         $this->data = $data;
@@ -25,7 +31,9 @@ class UniqueEmail implements ValidationRule, DataAwareRule
     }
 
     /**
-     * Executa a validação de disponibilidade do título do projeto.
+     * Executa a validação de e-mail já cadastrado na base de dados.  
+     * Caso já esteja cadastrado, deve executar um retorno de falha
+     * na verificação.  
      *
      * @param string $attr
      * @param mixed $value
@@ -52,7 +60,7 @@ class UniqueEmail implements ValidationRule, DataAwareRule
     public function check(string $email) : bool
     {
         $entity = $this->data['entity'] ?? null;
-        $exists  = $this->finder()->exists($email);
+        $exists = $this->finder()->exists($email);
 
         if ($entity == null) {
             return ($exists == true) ? false : true;

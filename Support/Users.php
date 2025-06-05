@@ -3,6 +3,7 @@
 namespace Maestro\Users\Support;
 
 use Illuminate\Support\Facades\Facade;
+use Maestro\Users\Support\Concerns\HasModuleName;
 
 /**
  * @method static \Maestro\Users\Services\Foundation\UserFinder finder()
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\Facade;
  */
 class Users extends Facade
 {
+    use HasModuleName;
+
     /**
      * Registra o nome do Facade.
      *

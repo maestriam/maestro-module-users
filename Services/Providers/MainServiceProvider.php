@@ -2,27 +2,27 @@
 
 namespace Maestro\Users\Services\Providers;
 
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Maestro\Users\Console\SetupCommand;
 use Maestro\Users\Http\Rules\UniqueEmail;
+use Illuminate\Support\Facades\Validator;
 use Maestro\Users\Console\PopulateCommand;
-use Maestro\Users\Support\Facades\UserFacade;
+use Maestro\Users\Support\Facades\ModuleFacade;
+use Maestro\Admin\Support\Concerns\RegistersFacade;
+use Maestro\Admin\Support\Concerns\RegistersDatabase;
 use Maestro\Users\Http\Middleware\AuthenticatesUsers;
-use Maestriam\Maestro\Foundation\Registers\FileRegister;
+use Maestro\Users\Support\Concerns\HasModuleName;
 
 class MainServiceProvider extends ServiceProvider
 {
-    /**
-     * @var string
-     */
-    protected $moduleName = 'Users';
+    use HasModuleName, 
+        RegistersFacade,
+        RegistersDatabase;
 
     /**
-     * @var string
+     * {@inheritDoc}
      */
-    protected $moduleNameLower = 'users';
+    private string $facade = ModuleFacade::class;
 
     /**
      * Boot the application events.
@@ -30,12 +30,9 @@ class MainServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-    {
-        $this->registerTranslations();
-        $this->registerConfig();
-        $this->registerViews();
-        $this->registerSeeds();
+    {        
         $this->registerFacade();
+        $this->registerSeeds();
         $this->registerMiddlewares();
         $this->registerMigrations();
         $this->registerCommands();
@@ -51,6 +48,7 @@ class MainServiceProvider extends ServiceProvider
     {
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(ViewServiceProvider::class);
+        $this->app->register(FoundationServiceProvider::class);
     }
 
     public function registerMiddlewares()
@@ -67,70 +65,6 @@ class MainServiceProvider extends ServiceProvider
     private function registerRules()
     {        
         Validator::extend('users.email.unique', UniqueEmail::class);
-    }
-
-    /**
-     * Registra o facade de suporte, para fornecer
-     * funcionalidades para outros módulos.
-     */
-    protected function registerFacade(): self
-    {
-        $this->app->bind('users', function () {
-            return new UserFacade();
-        });
-
-        return $this;
-    }
-
-    /**
-     * Register config.
-     *
-     * @return void
-     */
-    protected function registerConfig()
-    {
-        $file = 'Resources/config/config.php';
-
-        $this->publishes([
-            module_path($this->moduleName, $file) => config_path($this->moduleNameLower.'.php'),
-        ], 'config');
-        $this->mergeConfigFrom(
-            module_path($this->moduleName, $file), $this->moduleNameLower
-        );
-    }
-
-    /**
-     * Register views.
-     *
-     * @return void
-     */
-    public function registerViews()
-    {
-        $viewPath = resource_path('views/modules/'.$this->moduleNameLower);
-
-        $sourcePath = module_path($this->moduleName, 'Resources/views');
-
-        $this->publishes([
-            $sourcePath => $viewPath,
-        ], ['views', $this->moduleNameLower.'-module-views']);
-
-        $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
-    }
-
-    /**
-     * Register translations.
-     *
-     * @return void
-     */
-    public function registerTranslations()
-    {
-        $langPath = resource_path('lang/modules/'.$this->moduleNameLower);
-
-        if (is_dir($langPath)) {
-            $this->loadTranslationsFrom($langPath, $this->moduleNameLower);
-        } else {
-            $this->loadTranslationsFrom(module_path($this->moduleName, 'Resources/lang'), $this->moduleNameLower);
-        }
     }
 
     /**
@@ -154,33 +88,5 @@ class MainServiceProvider extends ServiceProvider
     public function provides()
     {
         return [];
-    }
-
-    private function getPublishableViewPaths(): array
-    {
-        $paths = [];
-        foreach (Config::get('view.paths') as $path) {
-            if (is_dir($path.'/modules/'.$this->moduleNameLower)) {
-                $paths[] = $path.'/modules/'.$this->moduleNameLower;
-            }
-        }
-
-        return $paths;
-    }
-
-    private function registerSeeds(): self
-    {
-        $path = module_path($this->moduleName, '/Database/Seeders/');
-
-        FileRegister::from($path);
-
-        return $this;
-    }
-
-    private function registerMigrations()
-    {
-        $path = module_path($this->moduleName, 'Database/Migrations');
-
-        $this->loadMigrationsFrom($path);
     }
 }
