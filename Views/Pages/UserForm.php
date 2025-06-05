@@ -7,7 +7,7 @@ use Maestro\Admin\Views\MaestroView;
 use Illuminate\Support\Facades\Session;
 use Maestro\Users\Support\Concerns\CreatesUsers;
 use Maestro\Users\Support\Concerns\UpdatesUsers;
-use Maestro\Users\Support\Concerns\SearchesUsers;
+use Maestro\Users\Support\Concerns\FindsUsers;
 use Livewire\Features\SupportRedirects\Redirector;
 use Maestro\Users\Exceptions\UserNotFoundException;
 use Maestro\Accounts\Support\Concerns\SendsAccountErrors;
@@ -19,7 +19,7 @@ class UserForm extends MaestroView
         SendsAccountErrors, 
         PageRedirections,
         UpdatesUsers,
-        SearchesUsers;
+        FindsUsers;
 
     /**
      * Arquivo de view do componente

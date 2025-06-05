@@ -2,12 +2,12 @@
 
 namespace Maestro\Users\Tests\Unit\Foundation\UserFinder;
 
-use Maestro\Users\Support\Concerns\SearchesUsers;
+use Maestro\Users\Support\Concerns\FindsUsers;
 use Maestro\Users\Tests\TestCase;
 
 class ExistsTest extends TestCase
 {
-    use SearchesUsers;
+    use FindsUsers;
 
     public function testExistByEmail()
     {

@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\Session;
 use Maestro\Admin\Views\MaestroView;
 use Maestro\Users\Entities\User;
 use Maestro\Users\Support\Concerns\DeletesUsers;
-use Maestro\Users\Support\Concerns\SearchesUsers;
+use Maestro\Users\Support\Concerns\FindsUsers;
 use Maestro\Admin\Support\Concerns\WithPaginationComponent;
 use Maestro\Users\Support\Enums\LivewireEnum;
 
 class UserIndex extends MaestroView
 {
-    use SearchesUsers,
+    use FindsUsers,
         WithPaginationComponent;    
 
     /**

@@ -8,7 +8,7 @@ use Maestro\Users\Services\Foundation\UserFinder;
  * Fornece funcionalidades para pesquisar/capturar
  * informações do usuário.  
  */
-trait SearchesUsers
+trait FindsUsers
 {
     /**
      * Retorna o serviço com as RN's sobre pesquisa e 

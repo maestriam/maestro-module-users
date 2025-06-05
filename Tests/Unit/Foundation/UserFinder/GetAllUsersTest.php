@@ -3,11 +3,11 @@
 namespace Maestro\Users\Tests\Unit\Foundation\UserFinder;
 
 use Maestro\Users\Tests\TestCase;
-use Maestro\Users\Support\Concerns\SearchesUsers;
+use Maestro\Users\Support\Concerns\FindsUsers;
 
 class GetAllUsersTest extends TestCase
 {
-    use SearchesUsers;
+    use FindsUsers;
 
     /**
      * Deve retornar a quantidade de dados populada no banco de dados.

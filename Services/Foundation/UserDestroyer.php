@@ -4,11 +4,11 @@ namespace Maestro\Users\Services\Foundation;
 
 use Maestro\Users\Entities\User;
 use Maestro\Accounts\Support\Accounts;
-use Maestro\Users\Support\Concerns\SearchesUsers;
+use Maestro\Users\Support\Concerns\FindsUsers;
 
 class UserDestroyer 
 {
-    use SearchesUsers;
+    use FindsUsers;
 
     /**
      * Exclui um usuário da base de dados, de acordo com seu ID.  

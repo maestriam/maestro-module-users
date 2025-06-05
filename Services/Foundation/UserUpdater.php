@@ -4,13 +4,13 @@ namespace Maestro\Users\Services\Foundation;
 
 use Maestro\Accounts\Support\Accounts;
 use Maestro\Users\Entities\User;
-use Maestro\Users\Support\Concerns\SearchesUsers;
+use Maestro\Users\Support\Concerns\FindsUsers;
 use Maestro\Users\Http\Requests\UpdateUserRequest;
 use Maestro\Admin\Support\Concerns\HandlesRequests;
 
 class UserUpdater 
 {
-    use SearchesUsers, HandlesRequests;
+    use FindsUsers, HandlesRequests;
 
     protected UpdateUserRequest $request;
 

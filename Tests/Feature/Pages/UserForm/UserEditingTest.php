@@ -3,14 +3,14 @@
 namespace Maestro\Users\Tests\Feature\Pages\UserForm;
 
 use Livewire\Livewire;
-use Maestro\Users\Support\Concerns\SearchesUsers;
+use Maestro\Users\Support\Concerns\FindsUsers;
 use Maestro\Users\Tests\TestCase;
 use Maestro\Users\Support\Users;
 use Maestro\Users\Views\Pages\UserForm;
 
 class UserEditingTest extends TestCase
 {
-    use SearchesUsers;
+    use FindsUsers;
 
     /**
      * Deve renderizar o formulário de edição corretamente.

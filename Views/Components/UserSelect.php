@@ -7,11 +7,11 @@ use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Modelable;
 use Maestro\Users\Exceptions\InvalidExcludedUserException;
-use Maestro\Users\Support\Concerns\SearchesUsers;
+use Maestro\Users\Support\Concerns\FindsUsers;
 
 class UserSelect extends Component
 {
-    use SearchesUsers;
+    use FindsUsers;
 
     /**
      * Valores selecionados via select

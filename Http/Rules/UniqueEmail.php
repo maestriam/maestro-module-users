@@ -5,11 +5,11 @@ namespace Maestro\Users\Http\Rules;
 use Closure;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidationRule;
-use Maestro\Users\Support\Concerns\SearchesUsers;
+use Maestro\Users\Support\Concerns\FindsUsers;
 
 class UniqueEmail implements ValidationRule, DataAwareRule
 {
-    use SearchesUsers;
+    use FindsUsers;
 
     /**
      * Todos os dados vindo da requisção
