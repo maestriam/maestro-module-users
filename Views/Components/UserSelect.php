@@ -8,6 +8,7 @@ use Livewire\Attributes\On;
 use Livewire\Attributes\Modelable;
 use Maestro\Users\Exceptions\InvalidExcludedUserException;
 use Maestro\Users\Support\Concerns\FindsUsers;
+use Maestro\Users\Support\Enums\LivewireEnum;
 
 class UserSelect extends Component
 {
@@ -52,7 +53,7 @@ class UserSelect extends Component
      *
      * @return void
      */
-    #[On("user-select:refresh")]
+    #[On(LivewireEnum::USER_SELECT_ON_REFRESH->value)]
     public function refresh(array $params)
     {                
         if (! isset($params['excludes'])) {

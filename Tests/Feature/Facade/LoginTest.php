@@ -6,7 +6,7 @@ use Maestro\Users\Tests\TestCase;
 use Maestro\Users\Support\Users;
 use Maestro\Users\Entities\User;
 
-class LoginFacadeTest extends TestCase
+class LoginTest extends TestCase
 {
     public function testLoginUser()
     {

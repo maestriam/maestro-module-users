@@ -8,10 +8,10 @@ use Maestro\Users\Http\Rules\UniqueEmail;
 use Illuminate\Support\Facades\Validator;
 use Maestro\Users\Console\PopulateCommand;
 use Maestro\Users\Support\Facades\ModuleFacade;
+use Maestro\Users\Support\Concerns\HasModuleName;
 use Maestro\Admin\Support\Concerns\RegistersFacade;
 use Maestro\Admin\Support\Concerns\RegistersDatabase;
 use Maestro\Users\Http\Middleware\AuthenticatesUsers;
-use Maestro\Users\Support\Concerns\HasModuleName;
 
 class MainServiceProvider extends ServiceProvider
 {
@@ -51,17 +51,25 @@ class MainServiceProvider extends ServiceProvider
         $this->app->register(FoundationServiceProvider::class);
     }
 
+    /**
+     * Registra os middlewares do módulo. 
+     *
+     * @return void
+     */
     public function registerMiddlewares()
     {
-        $middlewares = [
-            'users.auth' => AuthenticatesUsers::class,
-        ];
+        $middlewares = ['users.auth' => AuthenticatesUsers::class];
 
         foreach ($middlewares as $key => $class) {
             $this->app->make('router')->aliasMiddleware($key, $class);
         }
     }
 
+    /**
+     * Registra regras de validação de Request
+     *
+     * @return void
+     */
     private function registerRules()
     {        
         Validator::extend('users.email.unique', UniqueEmail::class);

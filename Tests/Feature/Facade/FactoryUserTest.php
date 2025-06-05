@@ -3,11 +3,11 @@
 namespace Maestro\Users\Tests\Feature\Facade;
 
 use Maestro\Users\Entities\User;
-use Maestro\Users\Http\Requests\StoreUserRequest;
 use Maestro\Users\Support\Users;
 use Maestro\Users\Tests\TestCase;
+use Maestro\Users\Http\Requests\StoreUserRequest;
 
-class FactoryUserFacadeTest extends TestCase
+class FactoryUserTest extends TestCase
 {
     /**
      * Deve retornar um mock de model do usuário para ser

@@ -5,7 +5,7 @@ namespace Maestro\Users\Support\Concerns;
 use Maestro\Users\Entities\User;
 use Maestro\Users\Database\Factories\UserFactory;
 
-trait WithUserFactory
+trait HasUserFactory
 {
     public final function factory() : UserFactory
     {

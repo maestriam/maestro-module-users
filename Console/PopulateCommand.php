@@ -3,12 +3,12 @@
 namespace Maestro\Users\Console;
 
 use Illuminate\Console\Command;
-use Maestro\Users\Support\Concerns\WithUserFactory;
+use Maestro\Users\Support\Concerns\HasUserFactory;
 
 
 class PopulateCommand extends Command
 {
-    use WithUserFactory;
+    use HasUserFactory;
 
      /**
      * The name and signature of the console command.

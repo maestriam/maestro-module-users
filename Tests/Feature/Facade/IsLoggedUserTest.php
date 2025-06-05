@@ -5,7 +5,7 @@ namespace Maestro\Users\Tests\Feature\Facade;
 use Maestro\Users\Support\Users;
 use Maestro\Users\Tests\TestCase;
 
-class IsLoggedUserFacadeTest extends TestCase
+class IsLoggedUserTest extends TestCase
 {
     public function testIsLogged()
     {

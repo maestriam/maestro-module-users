@@ -5,7 +5,7 @@ namespace Maestro\Users\Tests\Feature\Facade;
 use Maestro\Users\Tests\TestCase;
 use Maestro\Users\Support\Users;
 
-class CurrentUserFacadeTest extends TestCase
+class CurrentUserTest extends TestCase
 {
     public function testGetCurrentUser()
     {

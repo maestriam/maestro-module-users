@@ -5,7 +5,7 @@ namespace Maestro\Users\Tests\Feature\Facade;
 use Maestro\Users\Support\Users;
 use Maestro\Users\Tests\TestCase;
 
-class UserSearchFacadeTest extends TestCase
+class UserSearchTest extends TestCase
 {
     public function testSearchUser()
     {

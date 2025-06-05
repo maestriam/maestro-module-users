@@ -6,7 +6,7 @@ use Maestro\Accounts\Support\Accounts;
 use Maestro\Users\Tests\TestCase;
 use Maestro\Users\Support\Users;
 
-class DeleteUserFacadeTest extends TestCase
+class DeleteUserTest extends TestCase
 {
     public function testDeleteUserById()
     {

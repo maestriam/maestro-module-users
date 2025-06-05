@@ -7,11 +7,11 @@ use Maestro\Users\Support\Users;
 use Maestro\Users\Entities\User;
 use Maestro\Admin\Tests\TestCase as MainTestCase;
 use Maestro\Users\Services\Events\UserDeleting;
-use Maestro\Users\Support\Concerns\WithUserFactory;
+use Maestro\Users\Support\Concerns\HasUserFactory;
 
 class TestCase extends MainTestCase
 {
-    use WithUserFactory;
+    use HasUserFactory;
 
     public function setUp() : void
     {

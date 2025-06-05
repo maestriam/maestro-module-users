@@ -6,7 +6,7 @@ use Maestro\Users\Support\Users;
 use Maestro\Users\Tests\TestCase;
 use Maestro\Users\Exceptions\UserNotFoundException;
 
-class UserFinderFacadeTest extends TestCase
+class UserFinderTest extends TestCase
 {
     public function testFindUser()
     {

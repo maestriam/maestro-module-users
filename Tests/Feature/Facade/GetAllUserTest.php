@@ -6,7 +6,7 @@ use Maestro\Users\Support\Users;
 use Maestro\Users\Tests\TestCase;
 use Maestro\Users\Entities\User;
 
-class GetAllUserFacadeTest extends TestCase
+class GetAllUserTest extends TestCase
 {
     public function testGetAllUsers()
     {

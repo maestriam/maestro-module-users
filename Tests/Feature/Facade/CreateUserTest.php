@@ -6,7 +6,7 @@ use Maestro\Users\Tests\TestCase;
 use Maestro\Users\Support\Users;
 use Maestro\Admin\Exceptions\InvalidRequestException;
 
-class CreateUserFacadeTest extends TestCase
+class CreateUserTest extends TestCase
 {
     public function testCreateUserByRequest()
     {
