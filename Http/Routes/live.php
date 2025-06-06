@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Maestro\Users\Views\Pages\UserView;
+use Maestro\Users\Views\Pages\UserInfo;
 use Maestro\Users\Views\Pages\UserIndex;
 use Maestro\Users\Views\Pages\UserForm;
 use Maestro\Users\Views\Pages\UserHome;
@@ -37,7 +37,7 @@ Route::prefix('users')->group(function () {
         ->middleware(['users.auth'])
         ->name('maestro.users.edit');
 
-    Route::get('/{id}/info', UserView::class)
+    Route::get('/{id}/info', UserInfo::class)
         ->middleware(['users.auth'])
         ->name('maestro.users.info');
 });

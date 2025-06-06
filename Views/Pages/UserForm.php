@@ -4,14 +4,13 @@ namespace Maestro\Users\Views\Pages;
 
 use Maestro\Users\Entities\User;
 use Maestro\Admin\Views\MaestroView;
-use Illuminate\Support\Facades\Session;
+use Maestro\Users\Support\Concerns\FindsUsers;
 use Maestro\Users\Support\Concerns\CreatesUsers;
 use Maestro\Users\Support\Concerns\UpdatesUsers;
-use Maestro\Users\Support\Concerns\FindsUsers;
 use Livewire\Features\SupportRedirects\Redirector;
 use Maestro\Users\Exceptions\UserNotFoundException;
-use Maestro\Accounts\Support\Concerns\SendsAccountErrors;
 use Maestro\Admin\Support\Concerns\PageRedirections;
+use Maestro\Accounts\Support\Concerns\SendsAccountErrors;
 
 class UserForm extends MaestroView
 {
@@ -204,7 +203,7 @@ class UserForm extends MaestroView
 
         $message = sprintf($label, $user->account()->name);
 
-        Session::flash('message', $message);
+        $this->flashMessage('message', $message);
     }
 
     /**
@@ -223,7 +222,7 @@ class UserForm extends MaestroView
 
         $message = sprintf($label, $user->account()->name);
 
-        Session::flash('message', $message);
+        $this->flashMessage('message', $message);
     }
 
     /**

@@ -2,25 +2,27 @@
 
 namespace Maestro\Users\Views\Pages;
 
-use Maestro\Admin\Views\MaestroView;
 use Maestro\Users\Entities\User;
-use Maestro\Users\Support\Users;
+use Maestro\Admin\Views\MaestroView;
+use Maestro\Users\Support\Concerns\FindsUsers;
 
-class UserView extends MaestroView
+class UserInfo extends MaestroView
 {
+    use FindsUsers;
+
     /**
      * Dados do usuário. 
      *
-     * @var User|null
+     * @var User
      */
-    public ?User $user = null;
+    public User $user;
 
     /**
      * Caminho do arquivo de visualização do componente.
      *
      * @var string
      */
-    protected string $view = 'users::pages.user-view';
+    protected string $view = 'users::pages.user-info';
 
     /**
      * Inicializa os atributos ao iniciar o componente. 
@@ -30,19 +32,7 @@ class UserView extends MaestroView
      */
     public function mount(int $id) : void
     {
-        $this->init()->setUser($id);
-    }
-    
-    /**
-     * Inicia os atributos principais do componente.
-     *
-     * @return self
-     */
-    private function init() : self
-    {
-        $this->cardTitle = __('users::cards.view-user');
-
-        return $this;
+        $this->setUser($id);
     }
 
     /**
@@ -53,7 +43,7 @@ class UserView extends MaestroView
      */
     private function setUser(int $id) : self
     {
-        $this->user = Users::finder()->find($id);
+        $this->user = $this->finder()->findOrFail($id);
 
         return $this;
     }
@@ -66,6 +56,6 @@ class UserView extends MaestroView
      */
     public function render()
     {
-        return $this->renderView();
+        return $this->renderView($this->view);
     }
 }
