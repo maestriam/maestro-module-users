@@ -5,7 +5,10 @@
         :header="__('users::module.title')" 
         :subtitle="__('users::module.description')" >
     
-        <x-content-card :padding="0" :title="__('users::cards.list-user')">
+        <x-content-card 
+            :padding="0" 
+            :class="'card-primary'"
+            :title="__('users::cards.list-user')" >
             
             <x-slot:filters>
                 <x-search-filter-input :placeholder="__('users::placeholders.search')"/> 
