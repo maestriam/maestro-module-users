@@ -282,6 +282,6 @@ class UserForm extends MaestroView
      */
     public function render()
     {
-        return $this->renderView();
+        return $this->renderView($this->view);
     }
 }
