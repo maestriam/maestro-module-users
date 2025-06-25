@@ -3,12 +3,16 @@
 namespace Maestro\Users\Views\Pages;
 
 use Maestro\Users\Entities\User;
+use Livewire\Attributes\Computed;
+use Illuminate\Support\Collection;
 use Maestro\Admin\Views\MaestroView;
 use Maestro\Users\Support\Concerns\FindsUsers;
+use Maestro\Users\Support\Concerns\ControlsUsersPage;
 
 class UserInfo extends MaestroView
 {
-    use FindsUsers;
+    use FindsUsers, 
+        ControlsUsersPage;
 
     /**
      * Dados do usuário. 
@@ -57,5 +61,28 @@ class UserInfo extends MaestroView
     public function render()
     {
         return $this->renderView($this->view);
+    }
+
+    /**
+     * Retorna o nome de todos os slots para a inserção 
+     * de componentes enxertados dinâmicamente.  
+     *
+     * @return Collection
+     */
+    #[Computed]
+    public function slots() : Collection
+    {
+        return $this->usersPage()->userInfo()->components();
+    }
+
+    /**
+     * Retorna as propriedades compartilhadas com os componentes
+     * renderizados dinâmicamente. 
+     *
+     * @return array
+     */
+    public function props() : array
+    {
+        return ['id' => $this->user->id];
     }
 }
