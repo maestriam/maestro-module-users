@@ -4,9 +4,9 @@ namespace Maestro\Users\Views\Components;
 
 use Livewire\Attributes\On;
 use Maestro\Users\Entities\User;
-use Maestro\Admin\Support\Enums\Livewire;
 use Maestro\Users\Support\Enums\LivewireEnum;
 use Maestro\Users\Support\Concerns\DeletesUsers;
+use Maestro\Admin\Support\Enums\LivewireEnum as AdminLivewire;
 use Maestro\Admin\Views\Components\ActionMenu as BaseActionMenu;
 
 class ActionMenu extends BaseActionMenu
@@ -70,7 +70,7 @@ class ActionMenu extends BaseActionMenu
      *
      * @return void
      */
-    #[On(Livewire::ACTION_MENU_ON_DELETE->value .".{user.id}")]
+    #[On(AdminLivewire::ACTION_MENU_ON_DELETE->value .".{user.id}")]
     public function confirmed() : void
     {
         $this->destroyer()->delete($this->user->id);

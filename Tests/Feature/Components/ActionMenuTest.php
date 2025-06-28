@@ -7,7 +7,7 @@ use Maestro\Users\Support\Users;
 use Maestro\Users\Tests\TestCase;
 use Maestro\Users\Support\Enums\LivewireEnum;
 use Maestro\Users\Views\Components\ActionMenu;
-use Maestro\Admin\Support\Enums\Livewire as AdminLivewire;
+use Maestro\Admin\Support\Enums\LivewireEnum as AdminLivewire;
 
 class ActionMenuTest extends TestCase
 {
