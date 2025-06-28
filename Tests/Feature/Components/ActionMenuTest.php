@@ -13,55 +13,42 @@ class ActionMenuTest extends TestCase
 {
     public function testRenderComponent()
     {
-        Livewire::test(ActionMenu::class, $this->params())
-                ->assertStatus(200)
-                ->assertSee(__('users::buttons.edit'))
-                ->assertSee(__('users::buttons.delete'))
-                ->assertSee(__('users::buttons.view'));
-    }
+        $params = $this->params();
 
-    public function testShowDeleteModal()
-    {
-        Livewire::test(ActionMenu::class, $this->params())
-                    ->call('remove')
-                    ->assertDispatched('alert');
+        list($info, $edit) = $this->routes($params['user']->id);
+
+        Livewire::test(ActionMenu::class, $params)
+                ->assertStatus(200)
+                ->assertSeeHtml($info)
+                ->assertSeeHtml($edit)
+                ->assertSee(__('users::buttons.view'))
+                ->assertSee(__('users::buttons.delete'));
     }
 
     public function testClickConfirmDelete()
     {
         $params = $this->params();
+        
+        $id = $params['user']->id;
 
-        $onDeleted = LivewireEnum::ACTION_MENU_ON_DELETED->value;
-        $onDelete  = AdminLivewire::OPTION_RESOURCE_ON_DELETE->value;
-
+        $deleted = LivewireEnum::ACTION_MENU_ON_DELETED->value;
+        $delete  = AdminLivewire::ACTION_MENU_ON_DELETE->value . ".$id";        
+        
         Livewire::test(ActionMenu::class, $params)
-                ->dispatch($onDelete)
-                ->assertDispatched($onDeleted);
-
-        $user = Users::finder()->find($params['user']->id);
+                ->dispatch($delete)
+                ->assertDispatched($deleted);
+        
+        $user = Users::finder()->find($id);
 
         $this->assertNull($user);            
     }    
 
-    public function testRoutes()
+    private function routes(int $id) : array
     {
-        $params = $this->params();
-
-        $test = Livewire::test(ActionMenu::class, $params);
-
-        foreach(['edit', 'info'] as $destination) {
-
-            $route = $this->route($params['user']->id,  $destination);
-
-            $test->assertSeeHtml($route);
-        }
-    }
-
-    private function route(int $userId, string $destination) : string
-    {
-        $url = "maestro.users.$destination";
-
-        return route($url, ['id' => $userId]);
+        return [
+            route("maestro.users.info", ['id' => $id]),
+            route("maestro.users.edit", ['id' => $id]),
+        ];
     }
 
     private function params() : array
